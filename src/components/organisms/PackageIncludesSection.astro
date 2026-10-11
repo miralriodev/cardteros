@@ -46,27 +46,27 @@ const features = [
     <!-- Grid de 3 Cards de Beneficios (Paso 01, Paso 02, Paso 03 - Figma Spec 3945:750) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 text-left">
       {features.map((item) => (
-        <div class="relative rounded-2xl step-card-pattern border border-[#575757]/40 hover:border-[#EDE4BE]/60 p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.85)] hover:-translate-y-1 group overflow-hidden">
+        <div class="step-card p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-[#EDE4BE]/50 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9)] hover:-translate-y-1 group">
           
-          <!-- Contenedor de la Carta/Imagen Interior con Sombra Suave y Padding -->
-          <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden flex items-center justify-center p-3 mb-6 transition-transform duration-500 group-hover:scale-[1.03]">
+          <!-- Contenedor / Recuadro Interior con Patrón de Puntos y Luz de Fondo (Figma Exact) -->
+          <div class="step-image-box relative w-full aspect-square flex items-center justify-center p-6 mb-5 overflow-hidden">
             <img
               src={item.imageUrl}
               alt={item.title}
-              class="max-w-full max-h-full object-contain filter drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]"
+              class="max-w-full max-h-full object-contain filter drop-shadow-[0_16px_30px_rgba(0,0,0,0.95)] transition-transform duration-500 group-hover:scale-105"
               loading="lazy"
             />
           </div>
 
-          <!-- Información y Badge "PASO 0X" (Insignia Píldora Azul Suave / Desaturada) -->
-          <div class="pt-2">
-            <span class="inline-flex items-center px-3 py-0.5 rounded-full text-[10px] sm:text-[11px] font-mono font-bold tracking-[0.18em] uppercase mb-3 bg-[#20364d] text-[#6cb2eb] border border-[#2d4b68]/50 shadow-sm">
+          <!-- Información y Badge "PASO 0X" (Figma Exact: Azul sólido tenue, texto blanco/celeste) -->
+          <div>
+            <span class="inline-flex items-center px-3.5 py-1 rounded-full text-xs font-heading font-normal tracking-wider uppercase mb-3 bg-[#204060] text-white">
               {item.step}
             </span>
-            <h3 class="font-heading text-2xl sm:text-[26px] text-[#EDE4BE] group-hover:text-white transition-colors tracking-wide uppercase leading-tight mb-2">
+            <h3 class="font-heading text-2xl sm:text-[28px] text-[#EDE4BE] group-hover:text-white transition-colors tracking-wide uppercase leading-tight mb-2">
               {item.title}
             </h3>
-            <p class="text-xs sm:text-[13px] text-[#8E8E8E] leading-relaxed font-sans font-normal">
+            <p class="text-xs sm:text-[13px] text-[#6E6E6E] uppercase font-heading tracking-wider leading-snug">
               {item.description}
             </p>
           </div>
