@@ -128,10 +128,17 @@ const { class: className = '' } = Astro.props;
     </nav>
   </div>
 
-  <!-- Panel Desplegable Móvil Ultra-Premium (Full Blur Curtain sin emojis) -->
+  <!-- Overlay Backdrop Blur para todo el fondo (Efecto Balsa) -->
+  <div
+    id="mobile-menu-overlay"
+    class="sm:hidden fixed inset-0 top-16 bg-black/75 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300 z-30"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Panel Desplegable Móvil Ultra-Premium (Fondo negro sólido con bordes finos) -->
   <div
     id="mobile-menu-drawer"
-    class="sm:hidden fixed inset-x-0 top-16 bg-[#0a0a0a]/95 border-b border-[#222222] backdrop-blur-2xl px-6 py-8 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] -translate-y-full opacity-0 pointer-events-none shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
+    class="sm:hidden fixed inset-x-0 top-16 bg-[#0c0c0c] border-b border-[#222222] px-6 py-8 transition-all duration-350 ease-[cubic-bezier(0.16,1,0.3,1)] -translate-y-full opacity-0 pointer-events-none shadow-[0_30px_70px_rgba(0,0,0,0.98)] z-40"
   >
     <div class="flex flex-col gap-5 text-left font-mono">
       <a href="#drops" class="text-xs font-semibold tracking-[0.3em] uppercase text-[#EDE4BE] hover:text-white py-2.5 border-b border-[#1a1a1a] mobile-menu-link flex items-center justify-between">
@@ -161,6 +168,7 @@ const { class: className = '' } = Astro.props;
   const mobileCountBadge = document.getElementById('mobile-cart-count');
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
   const mobileLinks = document.querySelectorAll('.mobile-menu-link');
   const bar1 = document.getElementById('menu-bar-1');
   const bar2 = document.getElementById('menu-bar-2');
@@ -169,14 +177,20 @@ const { class: className = '' } = Astro.props;
   cartBtn?.addEventListener('click', () => openCart());
   mobileCartBtn?.addEventListener('click', () => openCart());
 
-  // Toggle Menú Hamburguesa Minimalista
+  // Toggle Menú Hamburguesa con Blur Overlay
   let isMenuOpen = false;
   function toggleMobileMenu() {
     isMenuOpen = !isMenuOpen;
-    if (mobileMenuDrawer && mobileMenuBtn) {
+    if (mobileMenuDrawer && mobileMenuBtn && mobileMenuOverlay) {
       if (isMenuOpen) {
+        // Mostrar drawer
         mobileMenuDrawer.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
         mobileMenuDrawer.classList.add('translate-y-0', 'opacity-100');
+        // Mostrar backdrop blur
+        mobileMenuOverlay.classList.remove('opacity-0', 'pointer-events-none');
+        mobileMenuOverlay.classList.add('opacity-100', 'pointer-events-auto');
+        // Bloquear scroll de fondo
+        document.body.style.overflow = 'hidden';
         mobileMenuBtn.setAttribute('aria-expanded', 'true');
         if (bar1 && bar2) {
           bar1.style.transform = 'translateY(6px) rotate(45deg)';
@@ -184,8 +198,14 @@ const { class: className = '' } = Astro.props;
           bar2.style.width = '100%';
         }
       } else {
+        // Ocultar drawer
         mobileMenuDrawer.classList.remove('translate-y-0', 'opacity-100');
         mobileMenuDrawer.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        // Ocultar backdrop blur
+        mobileMenuOverlay.classList.remove('opacity-100', 'pointer-events-auto');
+        mobileMenuOverlay.classList.add('opacity-0', 'pointer-events-none');
+        // Restaurar scroll de fondo
+        document.body.style.overflow = '';
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
         if (bar1 && bar2) {
           bar1.style.transform = 'none';
@@ -197,6 +217,7 @@ const { class: className = '' } = Astro.props;
   }
 
   mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+  mobileMenuOverlay?.addEventListener('click', toggleMobileMenu);
 
   mobileLinks.forEach((link) => {
     link.addEventListener('click', () => {
