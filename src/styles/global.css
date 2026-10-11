@@ -242,3 +242,15 @@
     transform: translate3d(330px, 55px, -220px) rotateY(-42deg) scale(0.75);
   }
 }
+
+/* ==========================================================================
+   5. PATRÓN DE PUNTOS Y GRADIENTE DE STEP CARDS (FIGMA SPEC)
+   ========================================================================== */
+.step-card-pattern {
+  background-color: #141414;
+  background-image: 
+    radial-gradient(rgba(255, 255, 255, 0.08) 1.2px, transparent 1.2px),
+    linear-gradient(180deg, rgba(28, 28, 28, 0.8) 0%, rgba(14, 14, 14, 0.95) 100%);
+  background-size: 16px 16px, 100% 100%;
+}
+
