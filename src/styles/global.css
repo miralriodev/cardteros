@@ -262,5 +262,38 @@
   border-radius: 12px;
 }
 
+/* ==========================================================================
+   6. ANIMACIONES DE ENTRADA SUAVES (SMOOTH REVEAL HEADINGS)
+   ========================================================================== */
+.reveal-heading {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-heading.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-heading-delay-1 {
+  transition-delay: 0.12s;
+}
+
+.reveal-heading-delay-2 {
+  transition-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-heading {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+
 
 

@@ -57,5 +57,27 @@ const {
     </main>
 
     <Footer />
+
+    <!-- Script de revelación suave al hacer scroll (Smooth Entrance Animation) -->
+    <script>
+      const observerCallback: IntersectionObserverCallback = (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      };
+
+      const headingObserver = new IntersectionObserver(observerCallback, {
+        root: null,
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.15
+      });
+
+      document.querySelectorAll('.reveal-heading').forEach((el) => {
+        headingObserver.observe(el);
+      });
+    </script>
   </body>
 </html>
