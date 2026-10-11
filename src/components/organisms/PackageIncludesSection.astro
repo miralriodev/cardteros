@@ -7,25 +7,22 @@ const { class: className = '' } = Astro.props;
 
 const features = [
   {
-    badge: 'PACK',
-    badgeColor: 'bg-[#294B69] text-[#71B5F4]',
-    title: 'SOBRES ORIGINALES',
-    description: 'Cajas selladas de fábrica y sobres individuales con garantía Topps y Panini.',
-    imageUrl: '/images/cards/25TRFB_FGC006838_HBX_OPEN-scaled.webp'
+    step: 'PASO 01',
+    title: 'SELECCIONA TU PACK',
+    description: 'Explora nuestra selección de cajas y sobres sellados de las marcas líderes del hobby mundial.',
+    imageUrl: '/src/assets/paso1.png'
   },
   {
-    badge: 'STICKER',
-    badgeColor: 'bg-[#1F5441] text-[#48D79B]',
-    title: 'STICKER EXCLUSIVO',
-    description: 'Ilustración conmemorativa del Cardtero y artes coleccionables en cada pedido.',
-    imageUrl: '/images/cards/4f20c4c8a9a5cb67415f5c2f8c95d0dda2d0e532_ARTEUNL_16C2S_27TN_0001.webp'
+    step: 'PASO 02',
+    title: 'CONFIGURA TÚ ENVIÓ',
+    description: 'Dirección protegida y opciones de resguardo o envío express directo a tus manos.',
+    imageUrl: '/src/assets/paso2.png'
   },
   {
-    badge: 'PROTECCIÓN',
-    badgeColor: 'bg-[#55367B] text-[#BF87FF]',
-    title: 'EMPAQUE BLINDADO',
-    description: 'Penny sleeve, toploader rígido y sello hermético contra dobleces y humedad.',
-    imageUrl: '/images/cards/f93fe40db0f8f9ae778efca86918293cb49223f3_ARTF1_16C2S_26TN_0063.webp'
+    step: 'PASO 03',
+    title: 'RIP IT, WE SHIP IT',
+    description: 'Vive la apertura en vivo con nosotros o recibe tu producto 100% sellado de fábrica.',
+    imageUrl: '/src/assets/paso3.png'
   }
 ];
 ---
@@ -36,23 +33,23 @@ const features = [
     <!-- Eyebrow y Título Centrado en 2 Líneas Masivas -->
     <div class="mb-16">
       <span class="text-xs font-mono font-medium tracking-[0.3em] text-[#8E8E8E] uppercase block mb-3 select-none">
-        ¿QUÉ INCLUYE CADA PEDIDO?
+        ¿CÓMO FUNCIONA?
       </span>
       <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#EDE4BE] tracking-wide uppercase leading-[0.9] select-none">
         TODO PAQUETE<br />TENDRÁ SU CARDTERO
       </h2>
       <p class="text-xs sm:text-sm font-mono tracking-[0.2em] text-[#6E6E6E] uppercase mt-3 select-none">
-        EL MEJOR EMBALAJE Y CUIDADO DEL HOBBY NACIONAL
+        VIVE LA EXPERIENCIA DE COLECCIONISTA
       </p>
     </div>
 
-    <!-- Grid de 3 Cards de Beneficios -->
+    <!-- Grid de 3 Cards de Beneficios (Paso 01, Paso 02, Paso 03) -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
       {features.map((item) => (
         <div class="rounded-2xl bg-black border border-[#2a2a2a] hover:border-[#EDE4BE]/50 p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-[0_15px_35px_rgba(0,0,0,0.9)] group">
           
-          <!-- Imagen de la Card -->
-          <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#0a0a0a] flex items-center justify-center p-4 mb-6 group-hover:bg-[#141414] transition-colors">
+          <!-- Imagen del Paso -->
+          <div class="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-[#0c0c0c] flex items-center justify-center p-3 mb-6 group-hover:bg-[#141414] transition-colors">
             <img
               src={item.imageUrl}
               alt={item.title}
@@ -61,10 +58,10 @@ const features = [
             />
           </div>
 
-          <!-- Info y Badge -->
+          <!-- Info y Badge Paso -->
           <div>
-            <span class={`inline-flex items-center px-2.5 py-0.5 rounded-sm text-[10px] font-mono font-black uppercase tracking-wider mb-3 ${item.badgeColor}`}>
-              {item.badge}
+            <span class="inline-flex items-center px-2.5 py-0.5 rounded-sm text-[10px] font-mono font-black uppercase tracking-wider mb-3 bg-[#244b70] text-[#78c0ff]">
+              {item.step}
             </span>
             <h3 class="font-heading text-2xl text-[#EDE4BE] group-hover:text-white transition-colors tracking-wide uppercase mb-2">
               {item.title}
