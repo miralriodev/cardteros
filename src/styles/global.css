@@ -124,6 +124,7 @@
   opacity: 0.35;
   filter: blur(1.5px) brightness(0.6);
   z-index: 5;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
 }
 
 .slab-coverflow-left {
@@ -131,6 +132,13 @@
   opacity: 0.75;
   filter: brightness(0.8);
   z-index: 10;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+}
+
+.slab-coverflow-left:hover {
+  transform: rotateY(14deg) scale(0.92) translateX(10px);
+  opacity: 0.95;
+  filter: brightness(1);
 }
 
 .slab-coverflow-center {
@@ -138,6 +146,12 @@
   opacity: 1;
   z-index: 20;
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(237, 228, 190, 0.25));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+}
+
+.slab-coverflow-center:hover {
+  transform: rotateY(0deg) scale(1.12) translateY(-10px);
+  filter: drop-shadow(0 35px 65px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 50px rgba(237, 228, 190, 0.45));
 }
 
 .slab-coverflow-right {
@@ -145,6 +159,13 @@
   opacity: 0.75;
   filter: brightness(0.8);
   z-index: 10;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+}
+
+.slab-coverflow-right:hover {
+  transform: rotateY(-14deg) scale(0.92) translateX(-10px);
+  opacity: 0.95;
+  filter: brightness(1);
 }
 
 .slab-coverflow-far-right {
@@ -152,4 +173,5 @@
   opacity: 0.35;
   filter: blur(1.5px) brightness(0.6);
   z-index: 5;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
 }

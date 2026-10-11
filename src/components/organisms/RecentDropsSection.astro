@@ -80,38 +80,48 @@ const { class: className = '' } = Astro.props;
       </div>
     </div>
 
-    <!-- Metadatos de la Carta Central y Controles -->
-    <div class="mt-8 flex flex-col items-center gap-4">
-      <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl text-[#EDE4BE] tracking-wider uppercase leading-none">
+    <!-- Metadatos de la Carta Central y Controles (+20% Escala & Smooth Animations) -->
+    <div class="mt-10 flex flex-col items-center gap-5">
+      <!-- Título de la carta (+20% más grande, brillo sutil) -->
+      <h3 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[54px] text-[#EDE4BE] tracking-widest uppercase leading-none transition-all duration-300 drop-shadow-[0_4px_20px_rgba(237,228,190,0.15)] hover:text-white">
         2025 TOPPS RISE • TYLER SHOUGH RC AUTO
       </h3>
-      <p class="text-xs font-mono tracking-widest text-[#8E8E8E] uppercase">
-        AUTO ON-CARD • SERIADO 1/1 • CALIFICACIÓN GEM MINT
+
+      <!-- Subtítulo / Especificaciones (+20% escala) -->
+      <p class="text-xs sm:text-sm md:text-base font-mono tracking-[0.25em] text-[#A0A0A0] uppercase font-medium">
+        AUTO ON-CARD <span class="text-[#A72027] mx-1">•</span> SERIADO 1/1 <span class="text-[#A72027] mx-1">•</span> CALIFICACIÓN GEM MINT
       </p>
 
-      <!-- Botones de Navegación Flechas y CTA Tienda -->
-      <div class="flex items-center gap-6 mt-2">
+      <!-- Botones de Navegación Flechas y CTA Tienda (+20% escala y animaciones suaves premium) -->
+      <div class="flex items-center gap-6 sm:gap-8 mt-4">
+        <!-- Flecha Izquierda (+20%: w-10 h-10, icono SVG suave) -->
         <button
           type="button"
-          class="w-8 h-8 rounded-full border border-[#444444] text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black flex items-center justify-center transition-colors text-xs font-bold"
+          class="w-10 h-10 rounded-full border border-[#444444] bg-[#141414]/80 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
           aria-label="Anterior carta"
         >
-          &lt;
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+          </svg>
         </button>
 
+        <!-- CTA Principal (+20% escala: px-10 py-3.5, font text-lg a text-xl, suave brillo y elevación) -->
         <a
-          href="#cards"
-          class="inline-flex items-center justify-center px-8 py-2.5 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white transition-all shadow-md"
+          href="#paquetes"
+          class="inline-flex items-center justify-center px-10 py-3.5 rounded-full font-heading text-lg sm:text-xl tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_10px_25px_rgba(237,228,190,0.2)] hover:shadow-[0_15px_35px_rgba(255,255,255,0.3)] font-medium"
         >
           VER EN LA TIENDA
         </a>
 
+        <!-- Flecha Derecha (+20%: w-10 h-10, icono SVG suave) -->
         <button
           type="button"
-          class="w-8 h-8 rounded-full border border-[#444444] text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black flex items-center justify-center transition-colors text-xs font-bold"
+          class="w-10 h-10 rounded-full border border-[#444444] bg-[#141414]/80 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
           aria-label="Siguiente carta"
         >
-          &gt;
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+          </svg>
         </button>
       </div>
     </div>
