@@ -1,6 +1,5 @@
 ---
 import CardterosLogo from '../atoms/CardterosLogo.astro';
-import Icon from '../atoms/Icon.astro';
 
 interface Props {
   class?: string;
@@ -9,11 +8,13 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<header class={`sticky top-0 z-40 w-full bg-[#111111]/95 backdrop-blur-md border-b border-[#2a2a2a] transition-colors ${className}`}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+<header class={`sticky top-0 z-40 w-full bg-[#111111]/95 backdrop-blur-md border-b border-[#222222] transition-colors ${className}`}>
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
     
     <!-- =========================================================================
-         1. VISTA MÓVIL (Logo mini a la izquierda, Carrito + Hamburguesa a la derecha)
+         1. VISTA MÓVIL PREMIUM MINIMALISTA
+         - Logo mini a la izquierda
+         - Solo 2 iconos ordenados a la derecha (Bolsa de compra + Menú)
          ========================================================================= -->
     <div class="flex sm:hidden items-center justify-between w-full">
       <!-- Logo Mini Izquierda -->
@@ -21,111 +22,65 @@ const { class: className = '' } = Astro.props;
         <img
           src="/assets/cardteros_logo.png"
           alt="Cardteros"
-          class="h-8 w-auto object-contain filter drop-shadow-md"
+          class="h-7 w-auto object-contain filter drop-shadow-sm"
           loading="eager"
         />
       </a>
 
-      <!-- Iconos Derecha (Carrito + Menú Hamburguesa) -->
-      <div class="flex items-center gap-3">
-        <!-- Trigger Carrito Móvil -->
+      <!-- Iconos Derecha (Carrito + Hamburguesa de 2 líneas minimalista) -->
+      <div class="flex items-center gap-4">
+        <!-- Bolsa de Compra Móvil -->
         <button
           id="mobile-cart-btn"
           type="button"
-          class="relative text-[#EDE4BE] hover:text-white p-2 transition-colors cursor-pointer focus-visible:outline-none"
-          aria-label="Abrir carrito"
+          class="relative text-[#EDE4BE] hover:text-white p-1.5 transition-colors cursor-pointer focus-visible:outline-none"
+          aria-label="Abrir bolsa de compra"
         >
-          <Icon name="cart" size={20} />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
           <span
             id="mobile-cart-count"
-            class="absolute top-0 right-0 w-4 h-4 bg-[#A72027] text-white text-[9px] font-mono font-bold rounded-full flex items-center justify-center scale-0 transition-transform duration-200"
+            class="absolute -top-1 -right-1 w-4 h-4 bg-[#A72027] text-white text-[9px] font-mono font-bold rounded-full flex items-center justify-center scale-0 transition-transform duration-200"
           >
             0
           </span>
         </button>
 
-        <!-- Botón Menú Hamburguesa -->
+        <!-- Botón Menú Hamburguesa Minimalista de 2 Líneas -->
         <button
           id="mobile-menu-btn"
           type="button"
-          class="text-[#EDE4BE] hover:text-white p-2 transition-colors cursor-pointer focus-visible:outline-none"
-          aria-label="Abrir menú de navegación"
+          class="text-[#EDE4BE] hover:text-white p-1.5 transition-colors cursor-pointer focus-visible:outline-none"
+          aria-label="Menú"
           aria-expanded="false"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <div class="w-5 h-3.5 flex flex-col justify-between">
+            <span class="w-full h-[1.5px] bg-[#EDE4BE] transition-transform duration-300 origin-center" id="menu-bar-1"></span>
+            <span class="w-3/4 self-end h-[1.5px] bg-[#EDE4BE] transition-transform duration-300 origin-center" id="menu-bar-2"></span>
+          </div>
         </button>
       </div>
     </div>
 
     <!-- =========================================================================
-         2. VISTA TABLET & DESKTOP (Completa con Logo Central y Dropdowns)
+         2. VISTA TABLET & DESKTOP (Ultra-Limpia, Sin Iconos Ruidosos ni Flechas)
          ========================================================================= -->
-    <nav class="hidden sm:flex items-center gap-8" aria-label="Navegación principal izquierda">
-      <!-- 1. Dropdown: DROPS -->
-      <div class="relative group">
-        <button
-          type="button"
-          class="flex items-center gap-1.5 text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#EDE4BE] group-hover:text-white transition-colors py-2 focus-visible:outline-none"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          <span>DROPS</span>
-          <svg class="w-3 h-3 text-[#8e8e8e] group-hover:text-[#EDE4BE] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <!-- Dropdown Menu Panel -->
-        <div class="absolute left-0 top-full pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-          <div class="w-56 rounded-xl bg-[#0e0e0e] border border-[#2a2a2a] p-2 shadow-2xl backdrop-blur-md">
-            <a href="#drops" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              🔥 LIVE BREAKS DE HOY
-            </a>
-            <a href="#drops" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              🏆 GRADED SLABS 1/1
-            </a>
-            <a href="#drops" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              📦 PREVENTAS LIMITADAS
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- 2. Dropdown: STORE -->
-      <div class="relative group">
-        <button
-          type="button"
-          class="flex items-center gap-1.5 text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#A0A0A0] group-hover:text-[#EDE4BE] transition-colors py-2 focus-visible:outline-none"
-          aria-expanded="false"
-          aria-haspopup="true"
-        >
-          <span>STORE</span>
-          <svg class="w-3 h-3 text-[#8e8e8e] group-hover:text-[#EDE4BE] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-          </svg>
-        </button>
-
-        <!-- Dropdown Menu Panel -->
-        <div class="absolute left-0 top-full pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200 z-50">
-          <div class="w-60 rounded-xl bg-[#0e0e0e] border border-[#2a2a2a] p-2 shadow-2xl backdrop-blur-md">
-            <a href="#paquetes" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              🏈 TOPPS RESURGENCE
-            </a>
-            <a href="#paquetes" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              ⚽ TOPPS CHROME UEFA
-            </a>
-            <a href="#paquetes" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#C4C4C4] hover:text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors">
-              🏀 PANINI PRIZM NBA
-            </a>
-            <div class="my-1 border-t border-[#222222]"></div>
-            <a href="#paquetes" class="block px-3 py-2 rounded-lg text-xs font-mono text-[#EDE4BE] hover:bg-[#1a1a1a] transition-colors font-bold">
-              VER TODAS LAS CAJAS →
-            </a>
-          </div>
-        </div>
-      </div>
+    <nav class="hidden sm:flex items-center gap-10" aria-label="Navegación principal izquierda">
+      <a
+        href="#drops"
+        class="text-xs font-mono font-semibold tracking-[0.28em] uppercase text-[#EDE4BE] hover:text-white transition-colors py-2 relative group"
+      >
+        <span>DROPS</span>
+        <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#EDE4BE] transition-all duration-300 group-hover:w-full"></span>
+      </a>
+      <a
+        href="#paquetes"
+        class="text-xs font-mono font-semibold tracking-[0.28em] uppercase text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors py-2 relative group"
+      >
+        <span>STORE</span>
+        <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#EDE4BE] transition-all duration-300 group-hover:w-full"></span>
+      </a>
     </nav>
 
     <!-- Logo Central Vintage Béisbol Script (Desktop) -->
@@ -136,42 +91,35 @@ const { class: className = '' } = Astro.props;
     </div>
 
     <!-- Navegación Derecha (Desktop) -->
-    <nav class="hidden sm:flex items-center gap-8" aria-label="Navegación principal derecha">
+    <nav class="hidden sm:flex items-center gap-10" aria-label="Navegación principal derecha">
       <a
         href="#faq"
-        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors"
+        class="text-xs font-mono font-semibold tracking-[0.28em] uppercase text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors py-2"
       >
         FAQ
       </a>
       <a
         href="#drops"
-        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#A72027] hover:text-[#FF4D57] transition-colors flex items-center gap-2"
+        class="text-xs font-mono font-semibold tracking-[0.28em] uppercase text-[#A72027] hover:text-[#FF4D57] transition-colors py-2 flex items-center gap-2"
       >
         <span>NEW</span>
         <span class="w-1.5 h-1.5 rounded-full bg-[#A72027] animate-pulse"></span>
       </a>
 
-      <!-- Iconos de Acción Rápidos -->
-      <div class="flex items-center gap-4 pl-4 border-l border-[#2e2e2e]">
-        <button
-          type="button"
-          class="text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors p-1 cursor-pointer"
-          aria-label="Buscar coleccionables"
-        >
-          <Icon name="search" size={18} />
-        </button>
-
-        <!-- Botón Trigger Carrito Desktop -->
+      <!-- Iconos de Acción Rápidos Minimalistas -->
+      <div class="flex items-center gap-4 pl-6 border-l border-[#262626]">
         <button
           id="navbar-cart-btn"
           type="button"
-          class="relative text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors p-1 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE] rounded-md"
+          class="relative text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors p-1.5 cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#EDE4BE] rounded-md"
           aria-label="Abrir carrito de compras"
         >
-          <Icon name="cart" size={18} />
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+          </svg>
           <span
             id="navbar-cart-count"
-            class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-[#A72027] text-white text-[9px] font-mono font-bold rounded-full flex items-center justify-center scale-0 transition-transform duration-200"
+            class="absolute -top-1 -right-1 w-4 h-4 bg-[#A72027] text-white text-[9px] font-mono font-bold rounded-full flex items-center justify-center scale-0 transition-transform duration-200"
           >
             0
           </span>
@@ -180,23 +128,25 @@ const { class: className = '' } = Astro.props;
     </nav>
   </div>
 
-  <!-- Panel Desplegable Móvil (Menú Hamburguesa) -->
+  <!-- Panel Desplegable Móvil Ultra-Premium (Full Blur Curtain sin emojis) -->
   <div
     id="mobile-menu-drawer"
-    class="sm:hidden fixed inset-x-0 top-16 bg-[#0e0e0e]/98 border-b border-[#2a2a2a] backdrop-blur-xl px-6 py-6 transition-all duration-300 ease-out -translate-y-full opacity-0 pointer-events-none shadow-2xl"
+    class="sm:hidden fixed inset-x-0 top-16 bg-[#0a0a0a]/95 border-b border-[#222222] backdrop-blur-2xl px-6 py-8 transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)] -translate-y-full opacity-0 pointer-events-none shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
   >
-    <div class="flex flex-col gap-4 text-left font-mono">
-      <a href="#drops" class="text-sm font-bold tracking-[0.2em] uppercase text-[#EDE4BE] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
-        🔥 DROPS RECIENTES
+    <div class="flex flex-col gap-5 text-left font-mono">
+      <a href="#drops" class="text-xs font-semibold tracking-[0.3em] uppercase text-[#EDE4BE] hover:text-white py-2.5 border-b border-[#1a1a1a] mobile-menu-link flex items-center justify-between">
+        <span>DROPS RECIENTES</span>
+        <span class="text-[10px] text-[#A72027] tracking-widest">LIVE</span>
       </a>
-      <a href="#paquetes" class="text-sm font-bold tracking-[0.2em] uppercase text-[#EDE4BE] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
-        📦 TIENDA / CAJAS
+      <a href="#paquetes" class="text-xs font-semibold tracking-[0.3em] uppercase text-[#EDE4BE] hover:text-white py-2.5 border-b border-[#1a1a1a] mobile-menu-link flex items-center justify-between">
+        <span>TIENDA / CAJAS</span>
+        <span class="text-[10px] text-[#555] tracking-widest">SEALED</span>
       </a>
-      <a href="#acerca" class="text-sm font-bold tracking-[0.2em] uppercase text-[#A0A0A0] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
-        ℹ️ CÓMO FUNCIONA
+      <a href="#acerca" class="text-xs font-semibold tracking-[0.3em] uppercase text-[#A0A0A0] hover:text-white py-2.5 border-b border-[#1a1a1a] mobile-menu-link">
+        <span>CÓMO FUNCIONA</span>
       </a>
-      <a href="#faq" class="text-sm font-bold tracking-[0.2em] uppercase text-[#A0A0A0] hover:text-white py-2 mobile-menu-link">
-        ❓ PREGUNTAS FRECUENTES (FAQ)
+      <a href="#faq" class="text-xs font-semibold tracking-[0.3em] uppercase text-[#A0A0A0] hover:text-white py-2.5 mobile-menu-link">
+        <span>PREGUNTAS FRECUENTES</span>
       </a>
     </div>
   </div>
@@ -212,12 +162,14 @@ const { class: className = '' } = Astro.props;
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
   const mobileLinks = document.querySelectorAll('.mobile-menu-link');
+  const bar1 = document.getElementById('menu-bar-1');
+  const bar2 = document.getElementById('menu-bar-2');
 
-  // Trigger Carrito (Desktop y Móvil)
+  // Trigger Carrito
   cartBtn?.addEventListener('click', () => openCart());
   mobileCartBtn?.addEventListener('click', () => openCart());
 
-  // Trigger Menú Hamburguesa
+  // Toggle Menú Hamburguesa Minimalista
   let isMenuOpen = false;
   function toggleMobileMenu() {
     isMenuOpen = !isMenuOpen;
@@ -226,10 +178,20 @@ const { class: className = '' } = Astro.props;
         mobileMenuDrawer.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
         mobileMenuDrawer.classList.add('translate-y-0', 'opacity-100');
         mobileMenuBtn.setAttribute('aria-expanded', 'true');
+        if (bar1 && bar2) {
+          bar1.style.transform = 'translateY(6px) rotate(45deg)';
+          bar2.style.transform = 'translateY(-6px) rotate(-45deg)';
+          bar2.style.width = '100%';
+        }
       } else {
         mobileMenuDrawer.classList.remove('translate-y-0', 'opacity-100');
         mobileMenuDrawer.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
         mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        if (bar1 && bar2) {
+          bar1.style.transform = 'none';
+          bar2.style.transform = 'none';
+          bar2.style.width = '75%';
+        }
       }
     }
   }
