@@ -6,89 +6,104 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<section class={`relative w-full overflow-hidden bg-[#111111] pt-14 pb-28 md:pt-20 md:pb-36 border-b border-[#2c2c2c] ${className}`}>
+<section class={`relative w-full overflow-visible bg-[#111111] sm:pt-14 sm:pb-28 md:pt-20 md:pb-36 border-b border-[#2c2c2c] ${className}`}>
   <!-- Destello / Spotlight Ambiental Central (Figma Vibe) -->
   <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
     <div class="w-[600px] h-[600px] bg-[#EDE4BE]/5 rounded-full blur-[160px] -translate-y-20"></div>
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-[#A72027]/10 rounded-full blur-[140px]"></div>
   </div>
 
-  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-    <!-- Título Masivo en Bebas Neue (Figma Exact Match - Optimizado iPhone/Móvil) -->
-    <h1 class="font-heading text-6xl sm:text-8xl md:text-9xl lg:text-[150px] tracking-wide text-[#EDE4BE] uppercase leading-[0.88] select-none mb-3 drop-shadow-sm px-2">
+  <!-- =========================================================================
+       CONTENEDOR MOBILE SCROLL-PINNED (140vh)
+       En móvil, el contenedor tiene altura para scroll, pero el contenido
+       se queda `sticky top-20` en pantalla mientras se ejecuta la animación completa.
+       Las cartas se abren simétricas, visibles y al 100% antes de liberar el scroll.
+       ========================================================================= -->
+  <div id="mobile-hero-track" class="sm:hidden relative w-full h-[150vh]">
+    <div class="sticky top-20 w-full flex flex-col items-center text-center px-4 pt-4 pb-6 overflow-hidden">
+      <!-- Título Masivo en Bebas Neue -->
+      <h1 class="font-heading text-6xl tracking-wide text-[#EDE4BE] uppercase leading-[0.88] select-none mb-2 drop-shadow-sm px-2">
+        YA LLEGAMOS
+      </h1>
+
+      <!-- Subtítulo con Puntos de Separación -->
+      <p class="text-[11px] font-mono font-medium tracking-[0.25em] text-[#C4C4C4] uppercase mb-4 select-none">
+        BREAKS • CAJAS • SLAPS
+      </p>
+
+      <!-- Deck de Cartas en Pantalla Fija -->
+      <div id="mobile-hero-deck" class="relative w-full max-w-sm mx-auto flex flex-col items-center pt-2 pb-4 overflow-visible select-none">
+        <div class="relative w-full h-[320px] flex items-center justify-center">
+          <!-- 1. Carta Trasera Izquierda (NBA) -->
+          <div
+            id="deck-card-1"
+            class="absolute w-[180px] transition-transform duration-75 ease-out will-change-transform cursor-pointer drop-shadow-[0_15px_30px_rgba(0,0,0,0.92)]"
+            style="transform: translate3d(-18px, 16px, 0) rotate(-6deg) scale(0.92); z-index: 10;"
+          >
+            <img
+              src="/src/assets/nbahero.png"
+              alt="Carta coleccionable NBA Basketball Gold Refractor"
+              class="w-full h-auto object-contain rounded-2xl"
+              loading="eager"
+            />
+          </div>
+
+          <!-- 2. Carta Central (Haaland - Frente y elevada) -->
+          <div
+            id="deck-card-2"
+            class="absolute w-[195px] transition-transform duration-75 ease-out will-change-transform cursor-pointer drop-shadow-[0_25px_50px_rgba(0,0,0,0.98)]"
+            style="transform: translate3d(0, 0, 30px) rotate(0deg) scale(1.02); z-index: 30;"
+          >
+            <img
+              src="/src/assets/herohaland.png"
+              alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
+              class="w-full h-auto object-contain rounded-2xl"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </div>
+
+          <!-- 3. Carta Trasera Derecha (Josh Allen) -->
+          <div
+            id="deck-card-3"
+            class="absolute w-[180px] transition-transform duration-75 ease-out will-change-transform cursor-pointer drop-shadow-[0_15px_30px_rgba(0,0,0,0.92)]"
+            style="transform: translate3d(18px, 16px, 0) rotate(6deg) scale(0.92); z-index: 10;"
+          >
+            <img
+              src="/src/assets/joshallenhero.png"
+              alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
+              class="w-full h-auto object-contain rounded-2xl"
+              loading="eager"
+            />
+          </div>
+        </div>
+
+        <!-- Micro-indicador de Scroll interactivo para iPhone -->
+        <div id="deck-scroll-hint" class="flex items-center gap-2 mt-3 text-[10px] font-mono tracking-widest text-[#71B5F4] uppercase transition-opacity duration-300">
+          <span class="w-1.5 h-1.5 rounded-full bg-[#71B5F4] animate-ping"></span>
+          <span>SCROLL PARA ABRIR EL PACK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       DESKTOP & TABLET: LAYOUT TRADICIONAL EXPANDIDO
+       ========================================================================= -->
+  <div class="hidden sm:flex relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex-col items-center text-center">
+    <!-- Título Masivo en Bebas Neue -->
+    <h1 class="font-heading sm:text-8xl md:text-9xl lg:text-[150px] tracking-wide text-[#EDE4BE] uppercase leading-[0.85] select-none mb-3 drop-shadow-sm px-2">
       YA LLEGAMOS
     </h1>
 
     <!-- Subtítulo con Puntos de Separación -->
-    <p class="text-[11px] sm:text-sm md:text-base font-mono font-medium tracking-[0.25em] sm:tracking-[0.35em] text-[#C4C4C4] uppercase mb-8 sm:mb-16 select-none">
+    <p class="sm:text-sm md:text-base font-mono font-medium tracking-[0.35em] text-[#C4C4C4] uppercase sm:mb-16 select-none">
       BREAKS • CAJAS • SLAPS
     </p>
 
-    <!-- =========================================================================
-         OPCIÓN 1: MÓVIL / iPHONE (SCROLL-DRIVEN 3D DECK CASSETTE / FLUID TILT)
-         Variación de última generación: Las cartas inician en deck apilado y al
-         scrollear se abren en cascada con inclinación giroscópica y desaceleración.
-         ========================================================================= -->
-    <div id="mobile-hero-deck" class="relative w-full max-w-sm mx-auto flex sm:hidden flex-col items-center pt-2 pb-8 overflow-visible select-none">
-      <div class="relative w-full h-[330px] flex items-center justify-center">
-        <!-- 1. Carta Trasera Izquierda (NBA) -->
-        <div
-          id="deck-card-1"
-          class="absolute w-[200px] transition-transform duration-100 ease-out will-change-transform cursor-pointer drop-shadow-[0_15px_30px_rgba(0,0,0,0.92)]"
-          style="transform: translate3d(-24px, 18px, 0) rotate(-8deg) scale(0.92); z-index: 10;"
-        >
-          <img
-            src="/src/assets/nbahero.png"
-            alt="Carta coleccionable NBA Basketball Gold Refractor"
-            class="w-full h-auto object-contain rounded-2xl"
-            loading="eager"
-          />
-        </div>
-
-        <!-- 2. Carta Central (Haaland - Frente y elevada) -->
-        <div
-          id="deck-card-2"
-          class="absolute w-[215px] transition-transform duration-100 ease-out will-change-transform cursor-pointer drop-shadow-[0_25px_50px_rgba(0,0,0,0.98)]"
-          style="transform: translate3d(0, 0, 30px) rotate(0deg) scale(1.05); z-index: 30;"
-        >
-          <img
-            src="/src/assets/herohaland.png"
-            alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
-            class="w-full h-auto object-contain rounded-2xl"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-
-        <!-- 3. Carta Trasera Derecha (Josh Allen) -->
-        <div
-          id="deck-card-3"
-          class="absolute w-[200px] transition-transform duration-100 ease-out will-change-transform cursor-pointer drop-shadow-[0_15px_30px_rgba(0,0,0,0.92)]"
-          style="transform: translate3d(24px, 18px, 0) rotate(8deg) scale(0.92); z-index: 10;"
-        >
-          <img
-            src="/src/assets/joshallenhero.png"
-            alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
-            class="w-full h-auto object-contain rounded-2xl"
-            loading="eager"
-          />
-        </div>
-      </div>
-
-      <!-- Micro-indicador de Scroll interactivo para iPhone -->
-      <div class="flex items-center gap-2 mt-2 text-[10px] font-mono tracking-widest text-[#71B5F4] uppercase opacity-75">
-        <span class="w-1.5 h-1.5 rounded-full bg-[#71B5F4] animate-ping"></span>
-        <span>SCROLL DOWN PARA ABRIR EL PACK</span>
-      </div>
-    </div>
-
-    <!-- =========================================================================
-         OPCIÓN 2: TABLET Y DESKTOP (ABANICO 3D AMPLIO Y EXPANDIDO)
-         ========================================================================= -->
-    <div class="hidden sm:flex relative w-full max-w-4xl mx-auto items-center justify-center pt-2 pb-6 perspective-hero overflow-visible">
+    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero overflow-visible">
       <div class="relative flex items-center justify-center w-full min-h-[440px] md:min-h-[520px]">
-        
-        <!-- 1. Carta Izquierda: Jugador NBA (Crecida a w-[270px] md:w-[325px]) -->
+        <!-- 1. Carta Izquierda: Jugador NBA -->
         <div class="absolute sm:left-2 md:left-6 sm:top-6 w-[270px] md:w-[325px] hero-fan-left cursor-pointer group">
           <img
             src="/src/assets/nbahero.png"
@@ -98,7 +113,7 @@ const { class: className = '' } = Astro.props;
           />
         </div>
 
-        <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada) -->
+        <!-- 2. Carta Central: Erling Haaland -->
         <div class="relative w-[280px] md:w-[350px] hero-fan-center cursor-pointer group">
           <img
             src="/src/assets/herohaland.png"
@@ -109,7 +124,7 @@ const { class: className = '' } = Astro.props;
           />
         </div>
 
-        <!-- 3. Carta Derecha: Josh Allen (Crecida a w-[270px] md:w-[325px]) -->
+        <!-- 3. Carta Derecha: Josh Allen -->
         <div class="absolute sm:right-2 md:right-6 sm:top-6 w-[270px] md:w-[325px] hero-fan-right cursor-pointer group">
           <img
             src="/src/assets/joshallenhero.png"
@@ -118,47 +133,57 @@ const { class: className = '' } = Astro.props;
             loading="eager"
           />
         </div>
-
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  // Animación reactiva ultra-suave al scroll de iPhone / iOS
+  // Animación Scroll-Pinned para Mobile (iPhone / Android)
+  const track = document.getElementById('mobile-hero-track');
   const deck1 = document.getElementById('deck-card-1');
   const deck2 = document.getElementById('deck-card-2');
   const deck3 = document.getElementById('deck-card-3');
-  const mobileHero = document.getElementById('mobile-hero-deck');
+  const hintEl = document.getElementById('deck-scroll-hint');
 
-  if (mobileHero && deck1 && deck2 && deck3) {
+  if (track && deck1 && deck2 && deck3) {
     let ticking = false;
 
     const onScroll = () => {
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          const scrollY = window.scrollY;
-          // Progreso de apertura según el scroll inicial (0 a 300px)
-          const progress = Math.min(Math.max(scrollY / 240, 0), 1);
+          const rect = track.getBoundingClientRect();
+          // Cuánto se ha scrolleado dentro del track pinned (de 0 a scrollableDistance)
+          const scrollableDistance = track.offsetHeight - window.innerHeight;
+          const currentScroll = -rect.top;
+          
+          const progress = Math.min(Math.max(currentScroll / (scrollableDistance || 1), 0), 1);
 
-          // Interpolación de posiciones:
-          // Al scrollear, las cartas se separan lateralmente, flotan y abren su abanico de forma cinematográfica
-          const tx1 = -24 - (progress * 70); // Desplaza a la izquierda hasta -94px
-          const ty1 = 18 + (progress * 15);
-          const rot1 = -8 - (progress * 12); // Rota de -8deg a -20deg
-          const scale1 = 0.92 + (progress * 0.05);
+          // Interpolación suave y simultánea para abrir el pack al 100% antes de continuar
+          // Carta Izquierda (NBA) se abre hacia la izquierda
+          const tx1 = -18 - (progress * 82); // hasta -100px
+          const ty1 = 16 + (progress * 20);  // hasta 36px
+          const rot1 = -6 - (progress * 13); // hasta -19deg
+          const scale1 = 0.92 + (progress * 0.04);
 
-          const tx3 = 24 + (progress * 70);  // Desplaza a la derecha hasta +94px
-          const ty3 = 18 + (progress * 15);
-          const rot3 = 8 + (progress * 12);   // Rota de 8deg a +20deg
-          const scale3 = 0.92 + (progress * 0.05);
+          // Carta Derecha (Josh Allen) se abre hacia la derecha
+          const tx3 = 18 + (progress * 82);  // hasta +100px
+          const ty3 = 16 + (progress * 20);  // hasta 36px
+          const rot3 = 6 + (progress * 13);  // hasta +19deg
+          const scale3 = 0.92 + (progress * 0.04);
 
-          const ty2 = -(progress * 28);       // La carta central se eleva hacia arriba
-          const scale2 = 1.05 + (progress * 0.06);
+          // Carta Central (Haaland) flota hacia arriba
+          const ty2 = -(progress * 30);      // hasta -30px
+          const scale2 = 1.02 + (progress * 0.08); // hasta 1.10
 
           deck1.style.transform = `translate3d(${tx1}px, ${ty1}px, 0) rotate(${rot1}deg) scale(${scale1})`;
           deck3.style.transform = `translate3d(${tx3}px, ${ty3}px, 0) rotate(${rot3}deg) scale(${scale3})`;
           deck2.style.transform = `translate3d(0, ${ty2}px, 30px) rotate(0deg) scale(${scale2})`;
+
+          // Ocultar hint cuando ya empezó la animación
+          if (hintEl) {
+            hintEl.style.opacity = progress > 0.15 ? '0' : '0.8';
+          }
 
           ticking = false;
         });
@@ -167,7 +192,7 @@ const { class: className = '' } = Astro.props;
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    // Disparar una vez inicial
+    window.addEventListener('resize', onScroll, { passive: true });
     onScroll();
   }
 </script>
