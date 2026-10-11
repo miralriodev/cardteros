@@ -28,47 +28,35 @@ const { class: className = '' } = Astro.props;
     <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero">
       <div class="relative flex items-center justify-center w-full min-h-[360px] sm:min-h-[460px] md:min-h-[520px]">
         
-        <!-- 1. Carta Izquierda: Jugador NBA (Inclinada -14deg) -->
+        <!-- 1. Carta Izquierda: Jugador NBA (Inclinada -14deg, Sin contenedor/borde extra) -->
         <div class="absolute -left-2 sm:left-6 md:left-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-left cursor-pointer group">
-          <div class="relative rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 sm:p-2 group-hover:border-[#EDE4BE] transition-colors shadow-2xl">
-            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
-              <img
-                src="/src/assets/nbahero.png"
-                alt="Carta coleccionable NBA Basketball Gold Refractor"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="eager"
-              />
-            </div>
-          </div>
+          <img
+            src="/src/assets/nbahero.png"
+            alt="Carta coleccionable NBA Basketball Gold Refractor"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)]"
+            loading="eager"
+          />
         </div>
 
-        <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada) -->
-        <div class="relative w-[205px] sm:w-[275px] md:w-[325px] hero-fan-center cursor-pointer group">
-          <div class="relative rounded-2xl bg-[#0a0a0a] border-2 border-[#EDE4BE] p-2 sm:p-2.5 shadow-[0_30px_70px_rgba(0,0,0,0.95)] group-hover:border-white transition-all">
-            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
-              <img
-                src="/src/assets/herohaland.png"
-                alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="eager"
-                fetchpriority="high"
-              />
-            </div>
-          </div>
+        <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada, Sin contenedor/borde extra) -->
+        <div class="relative w-[210px] sm:w-[280px] md:w-[335px] hero-fan-center cursor-pointer group">
+          <img
+            src="/src/assets/herohaland.png"
+            alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_30px_60px_rgba(0,0,0,0.95)]"
+            loading="eager"
+            fetchpriority="high"
+          />
         </div>
 
-        <!-- 3. Carta Derecha: Josh Allen (Inclinada +14deg) -->
+        <!-- 3. Carta Derecha: Josh Allen (Inclinada +14deg, Sin contenedor/borde extra) -->
         <div class="absolute -right-2 sm:right-6 md:right-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-right cursor-pointer group">
-          <div class="relative rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 sm:p-2 group-hover:border-[#EDE4BE] transition-colors shadow-2xl">
-            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
-              <img
-                src="/src/assets/joshallenhero.png"
-                alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="eager"
-              />
-            </div>
-          </div>
+          <img
+            src="/src/assets/joshallenhero.png"
+            alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)]"
+            loading="eager"
+          />
         </div>
 
       </div>

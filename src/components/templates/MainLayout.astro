@@ -1,6 +1,7 @@
 ---
 import Navbar from '../organisms/Navbar.astro';
 import Footer from '../organisms/Footer.astro';
+import CartDrawer from '../organisms/CartDrawer.astro';
 import '../../styles/global.css';
 
 interface Props {
@@ -49,6 +50,7 @@ const {
     </a>
 
     <Navbar />
+    <CartDrawer />
 
     <main id="main-content" class="w-full">
       <slot />

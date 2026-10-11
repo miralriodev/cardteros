@@ -80,8 +80,38 @@ const formattedPrice = new Intl.NumberFormat('es-MX', {
       type="button"
       class="w-full py-2.5 px-4 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white active:scale-[0.98] transition-all shadow-sm flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
       data-item-id={id}
+      data-item-title={title}
+      data-item-subtitle={subtitle}
+      data-item-price={priceMxn}
+      data-item-image={imageUrl}
     >
       AGREGAR
     </button>
   </div>
 </div>
+
+<script>
+  import { addToCart } from '../../stores/cart';
+
+  document.querySelectorAll<HTMLButtonElement>('button[data-item-id]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-item-id');
+      const title = btn.getAttribute('data-item-title');
+      const subtitle = btn.getAttribute('data-item-subtitle') || '';
+      const price = Number(btn.getAttribute('data-item-price')) || 0;
+      const imageUrl = btn.getAttribute('data-item-image') || '';
+
+      if (id && title) {
+        addToCart({
+          id,
+          title,
+          subtitle,
+          priceMxn: price,
+          imageUrl,
+          quantity: 1,
+          type: 'box'
+        });
+      }
+    });
+  });
+</script>
