@@ -10,9 +10,59 @@ const { class: className = '' } = Astro.props;
 ---
 
 <header class={`sticky top-0 z-40 w-full bg-[#111111]/95 backdrop-blur-md border-b border-[#2a2a2a] transition-colors ${className}`}>
-  <div class="max-w-7xl mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-    <!-- Navegación Izquierda con Dropdown Menus -->
-    <nav class="flex items-center gap-8" aria-label="Navegación principal izquierda">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-16 sm:h-20 flex items-center justify-between">
+    
+    <!-- =========================================================================
+         1. VISTA MÓVIL (Logo mini a la izquierda, Carrito + Hamburguesa a la derecha)
+         ========================================================================= -->
+    <div class="flex sm:hidden items-center justify-between w-full">
+      <!-- Logo Mini Izquierda -->
+      <a href="/" class="flex items-center focus-visible:outline-none" aria-label="Cardteros Inicio">
+        <img
+          src="/assets/cardteros_logo.png"
+          alt="Cardteros"
+          class="h-8 w-auto object-contain filter drop-shadow-md"
+          loading="eager"
+        />
+      </a>
+
+      <!-- Iconos Derecha (Carrito + Menú Hamburguesa) -->
+      <div class="flex items-center gap-3">
+        <!-- Trigger Carrito Móvil -->
+        <button
+          id="mobile-cart-btn"
+          type="button"
+          class="relative text-[#EDE4BE] hover:text-white p-2 transition-colors cursor-pointer focus-visible:outline-none"
+          aria-label="Abrir carrito"
+        >
+          <Icon name="cart" size={20} />
+          <span
+            id="mobile-cart-count"
+            class="absolute top-0 right-0 w-4 h-4 bg-[#A72027] text-white text-[9px] font-mono font-bold rounded-full flex items-center justify-center scale-0 transition-transform duration-200"
+          >
+            0
+          </span>
+        </button>
+
+        <!-- Botón Menú Hamburguesa -->
+        <button
+          id="mobile-menu-btn"
+          type="button"
+          class="text-[#EDE4BE] hover:text-white p-2 transition-colors cursor-pointer focus-visible:outline-none"
+          aria-label="Abrir menú de navegación"
+          aria-expanded="false"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         2. VISTA TABLET & DESKTOP (Completa con Logo Central y Dropdowns)
+         ========================================================================= -->
+    <nav class="hidden sm:flex items-center gap-8" aria-label="Navegación principal izquierda">
       <!-- 1. Dropdown: DROPS -->
       <div class="relative group">
         <button
@@ -78,15 +128,15 @@ const { class: className = '' } = Astro.props;
       </div>
     </nav>
 
-    <!-- Logo Central Vintage Béisbol Script -->
-    <div class="flex items-center justify-center">
+    <!-- Logo Central Vintage Béisbol Script (Desktop) -->
+    <div class="hidden sm:flex items-center justify-center">
       <a href="/" class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE] rounded-sm transition-transform hover:scale-105" aria-label="Cardteros Inicio">
         <CardterosLogo size="lg" />
       </a>
     </div>
 
-    <!-- Navegación Derecha -->
-    <nav class="flex items-center gap-8" aria-label="Navegación principal derecha">
+    <!-- Navegación Derecha (Desktop) -->
+    <nav class="hidden sm:flex items-center gap-8" aria-label="Navegación principal derecha">
       <a
         href="#faq"
         class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#A0A0A0] hover:text-[#EDE4BE] transition-colors"
@@ -111,7 +161,7 @@ const { class: className = '' } = Astro.props;
           <Icon name="search" size={18} />
         </button>
 
-        <!-- Botón Trigger Carrito (Abre CartDrawer) -->
+        <!-- Botón Trigger Carrito Desktop -->
         <button
           id="navbar-cart-btn"
           type="button"
@@ -129,6 +179,27 @@ const { class: className = '' } = Astro.props;
       </div>
     </nav>
   </div>
+
+  <!-- Panel Desplegable Móvil (Menú Hamburguesa) -->
+  <div
+    id="mobile-menu-drawer"
+    class="sm:hidden fixed inset-x-0 top-16 bg-[#0e0e0e]/98 border-b border-[#2a2a2a] backdrop-blur-xl px-6 py-6 transition-all duration-300 ease-out -translate-y-full opacity-0 pointer-events-none shadow-2xl"
+  >
+    <div class="flex flex-col gap-4 text-left font-mono">
+      <a href="#drops" class="text-sm font-bold tracking-[0.2em] uppercase text-[#EDE4BE] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
+        🔥 DROPS RECIENTES
+      </a>
+      <a href="#paquetes" class="text-sm font-bold tracking-[0.2em] uppercase text-[#EDE4BE] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
+        📦 TIENDA / CAJAS
+      </a>
+      <a href="#acerca" class="text-sm font-bold tracking-[0.2em] uppercase text-[#A0A0A0] hover:text-white py-2 border-b border-[#1c1c1c] mobile-menu-link">
+        ℹ️ CÓMO FUNCIONA
+      </a>
+      <a href="#faq" class="text-sm font-bold tracking-[0.2em] uppercase text-[#A0A0A0] hover:text-white py-2 mobile-menu-link">
+        ❓ PREGUNTAS FRECUENTES (FAQ)
+      </a>
+    </div>
+  </div>
 </header>
 
 <script>
@@ -136,22 +207,57 @@ const { class: className = '' } = Astro.props;
 
   const cartBtn = document.getElementById('navbar-cart-btn');
   const countBadge = document.getElementById('navbar-cart-count');
+  const mobileCartBtn = document.getElementById('mobile-cart-btn');
+  const mobileCountBadge = document.getElementById('mobile-cart-count');
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenuDrawer = document.getElementById('mobile-menu-drawer');
+  const mobileLinks = document.querySelectorAll('.mobile-menu-link');
 
-  cartBtn?.addEventListener('click', () => {
-    openCart();
-  });
+  // Trigger Carrito (Desktop y Móvil)
+  cartBtn?.addEventListener('click', () => openCart());
+  mobileCartBtn?.addEventListener('click', () => openCart());
 
-  cartItems.subscribe((items) => {
-    const totalCount = Object.values(items).reduce((acc, curr) => acc + curr.quantity, 0);
-    if (countBadge) {
-      countBadge.textContent = totalCount.toString();
-      if (totalCount > 0) {
-        countBadge.classList.remove('scale-0');
-        countBadge.classList.add('scale-100');
+  // Trigger Menú Hamburguesa
+  let isMenuOpen = false;
+  function toggleMobileMenu() {
+    isMenuOpen = !isMenuOpen;
+    if (mobileMenuDrawer && mobileMenuBtn) {
+      if (isMenuOpen) {
+        mobileMenuDrawer.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        mobileMenuDrawer.classList.add('translate-y-0', 'opacity-100');
+        mobileMenuBtn.setAttribute('aria-expanded', 'true');
       } else {
-        countBadge.classList.remove('scale-100');
-        countBadge.classList.add('scale-0');
+        mobileMenuDrawer.classList.remove('translate-y-0', 'opacity-100');
+        mobileMenuDrawer.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
       }
     }
+  }
+
+  mobileMenuBtn?.addEventListener('click', toggleMobileMenu);
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      if (isMenuOpen) toggleMobileMenu();
+    });
+  });
+
+  // Contador de Carrito Sincronizado
+  cartItems.subscribe((items) => {
+    const totalCount = Object.values(items).reduce((acc, curr) => acc + curr.quantity, 0);
+    const badges = [countBadge, mobileCountBadge];
+
+    badges.forEach((badge) => {
+      if (badge) {
+        badge.textContent = totalCount.toString();
+        if (totalCount > 0) {
+          badge.classList.remove('scale-0');
+          badge.classList.add('scale-100');
+        } else {
+          badge.classList.remove('scale-100');
+          badge.classList.add('scale-0');
+        }
+      }
+    });
   });
 </script>
