@@ -14,47 +14,47 @@ const { class: className = '' } = Astro.props;
   </div>
 
   <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-    <!-- Título Masivo en Bebas Neue (Figma Exact Match) -->
-    <h1 class="font-heading text-7xl sm:text-8xl md:text-9xl lg:text-[150px] tracking-wide text-[#EDE4BE] uppercase leading-[0.85] select-none mb-3 drop-shadow-sm">
+    <!-- Título Masivo en Bebas Neue (Figma Exact Match - Optimizado iPhone/Móvil) -->
+    <h1 class="font-heading text-6xl sm:text-8xl md:text-9xl lg:text-[150px] tracking-wide text-[#EDE4BE] uppercase leading-[0.88] select-none mb-3 drop-shadow-sm px-2">
       YA LLEGAMOS
     </h1>
 
     <!-- Subtítulo con Puntos de Separación -->
-    <p class="text-xs sm:text-sm md:text-base font-mono font-medium tracking-[0.35em] text-[#C4C4C4] uppercase mb-12 sm:mb-16 select-none">
+    <p class="text-[11px] sm:text-sm md:text-base font-mono font-medium tracking-[0.25em] sm:tracking-[0.35em] text-[#C4C4C4] uppercase mb-8 sm:mb-16 select-none">
       BREAKS • CAJAS • SLAPS
     </p>
 
-    <!-- Showcase Visual de Cartas en Abanico 3D -->
-    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero">
-      <div class="relative flex items-center justify-center w-full min-h-[360px] sm:min-h-[460px] md:min-h-[520px]">
+    <!-- Showcase Visual de Cartas en Abanico 3D (Fluid para iPhone) -->
+    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero overflow-visible">
+      <div class="relative flex items-center justify-center w-full min-h-[300px] sm:min-h-[440px] md:min-h-[520px]">
         
         <!-- 1. Carta Izquierda: Jugador NBA (Inclinada -14deg, Sin contenedor/borde extra) -->
-        <div class="absolute -left-2 sm:left-6 md:left-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-left cursor-pointer group">
+        <div class="absolute -left-1 sm:left-6 md:left-14 top-4 sm:top-10 w-[140px] sm:w-[220px] md:w-[275px] hero-fan-left cursor-pointer group">
           <img
             src="/src/assets/nbahero.png"
             alt="Carta coleccionable NBA Basketball Gold Refractor"
-            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)]"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]"
             loading="eager"
           />
         </div>
 
         <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada, Sin contenedor/borde extra) -->
-        <div class="relative w-[210px] sm:w-[280px] md:w-[335px] hero-fan-center cursor-pointer group">
+        <div class="relative w-[170px] sm:w-[260px] md:w-[335px] hero-fan-center cursor-pointer group">
           <img
             src="/src/assets/herohaland.png"
             alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
-            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_30px_60px_rgba(0,0,0,0.95)]"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)]"
             loading="eager"
             fetchpriority="high"
           />
         </div>
 
         <!-- 3. Carta Derecha: Josh Allen (Inclinada +14deg, Sin contenedor/borde extra) -->
-        <div class="absolute -right-2 sm:right-6 md:right-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-right cursor-pointer group">
+        <div class="absolute -right-1 sm:right-6 md:right-14 top-4 sm:top-10 w-[140px] sm:w-[220px] md:w-[275px] hero-fan-right cursor-pointer group">
           <img
             src="/src/assets/joshallenhero.png"
             alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
-            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)]"
+            class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_15px_30px_rgba(0,0,0,0.9)]"
             loading="eager"
           />
         </div>

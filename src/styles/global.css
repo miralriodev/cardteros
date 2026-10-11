@@ -113,65 +113,132 @@
 }
 
 /* ==========================================================================
-   4. VITRINA COVERFLOW EN ARCO (DROPS RECIENTES 3D CAROUSEL)
+   4. VITRINA COVERFLOW EN ARCO DINÁMICA (DROPS RECIENTES 3D CAROUSEL)
    ========================================================================== */
 .slab-coverflow-container {
-  perspective: 1400px;
+  perspective: 1200px;
+  perspective-origin: center center;
+  touch-action: pan-y pinch-zoom;
 }
 
-.slab-coverflow-far-left {
-  transform: rotateY(38deg) scale(0.72) translateX(40px);
-  opacity: 0.35;
-  filter: blur(1.5px) brightness(0.6);
+/* Animaciones suaves universales para cada slot */
+.slab-slot {
+  position: absolute;
+  top: 0;
+  transition: transform 0.65s cubic-bezier(0.19, 1, 0.22, 1),
+              opacity 0.65s cubic-bezier(0.19, 1, 0.22, 1),
+              filter 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+  will-change: transform, opacity, filter;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Slot 0: Extremo Izquierdo */
+.slab-slot[data-pos="0"] {
+  transform: translate3d(-170px, 35px, -180px) rotateY(42deg) scale(0.68);
+  opacity: 0.28;
+  filter: blur(2px) brightness(0.5);
   z-index: 5;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
 }
 
-.slab-coverflow-left {
-  transform: rotateY(24deg) scale(0.85) translateX(20px);
+@media (min-width: 640px) {
+  .slab-slot[data-pos="0"] {
+    transform: translate3d(-240px, 45px, -200px) rotateY(42deg) scale(0.72);
+  }
+}
+
+@media (min-width: 1024px) {
+  .slab-slot[data-pos="0"] {
+    transform: translate3d(-330px, 55px, -220px) rotateY(42deg) scale(0.75);
+  }
+}
+
+/* Slot 1: Izquierdo Intermedio (Visible y cliqueable) */
+.slab-slot[data-pos="1"] {
+  transform: translate3d(-85px, 15px, -80px) rotateY(24deg) scale(0.85);
   opacity: 0.75;
-  filter: brightness(0.8);
-  z-index: 10;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.78);
+  z-index: 15;
+  cursor: pointer;
 }
 
-.slab-coverflow-left:hover {
-  transform: rotateY(14deg) scale(0.92) translateX(10px);
+@media (min-width: 640px) {
+  .slab-slot[data-pos="1"] {
+    transform: translate3d(-130px, 20px, -90px) rotateY(24deg) scale(0.86);
+  }
+}
+
+@media (min-width: 1024px) {
+  .slab-slot[data-pos="1"] {
+    transform: translate3d(-175px, 25px, -100px) rotateY(24deg) scale(0.88);
+  }
+}
+
+.slab-slot[data-pos="1"]:hover {
+  transform: translate3d(-75px, 5px, -60px) rotateY(16deg) scale(0.92);
   opacity: 0.95;
-  filter: brightness(1);
+  filter: brightness(0.95);
 }
 
-.slab-coverflow-center {
-  transform: rotateY(0deg) scale(1.05);
+/* Slot 2: Centro (Protagonista Destacado) */
+.slab-slot[data-pos="2"] {
+  transform: translate3d(0, 0, 40px) rotateY(0deg) scale(1.05);
   opacity: 1;
-  z-index: 20;
   filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(237, 228, 190, 0.25));
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+  z-index: 30;
+  cursor: default;
 }
 
-.slab-coverflow-center:hover {
-  transform: rotateY(0deg) scale(1.12) translateY(-10px);
+.slab-slot[data-pos="2"]:hover {
+  transform: translate3d(0, -12px, 60px) rotateY(0deg) scale(1.1);
   filter: drop-shadow(0 35px 65px rgba(0, 0, 0, 0.98)) drop-shadow(0 0 50px rgba(237, 228, 190, 0.45));
 }
 
-.slab-coverflow-right {
-  transform: rotateY(-24deg) scale(0.85) translateX(-20px);
+/* Slot 3: Derecho Intermedio (Visible y cliqueable) */
+.slab-slot[data-pos="3"] {
+  transform: translate3d(85px, 15px, -80px) rotateY(-24deg) scale(0.85);
   opacity: 0.75;
-  filter: brightness(0.8);
-  z-index: 10;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+  filter: brightness(0.78);
+  z-index: 15;
+  cursor: pointer;
 }
 
-.slab-coverflow-right:hover {
-  transform: rotateY(-14deg) scale(0.92) translateX(-10px);
+@media (min-width: 640px) {
+  .slab-slot[data-pos="3"] {
+    transform: translate3d(130px, 20px, -90px) rotateY(-24deg) scale(0.86);
+  }
+}
+
+@media (min-width: 1024px) {
+  .slab-slot[data-pos="3"] {
+    transform: translate3d(175px, 25px, -100px) rotateY(-24deg) scale(0.88);
+  }
+}
+
+.slab-slot[data-pos="3"]:hover {
+  transform: translate3d(75px, 5px, -60px) rotateY(-16deg) scale(0.92);
   opacity: 0.95;
-  filter: brightness(1);
+  filter: brightness(0.95);
 }
 
-.slab-coverflow-far-right {
-  transform: rotateY(-38deg) scale(0.72) translateX(-40px);
-  opacity: 0.35;
-  filter: blur(1.5px) brightness(0.6);
+/* Slot 4: Extremo Derecho */
+.slab-slot[data-pos="4"] {
+  transform: translate3d(170px, 35px, -180px) rotateY(-42deg) scale(0.68);
+  opacity: 0.28;
+  filter: blur(2px) brightness(0.5);
   z-index: 5;
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease, filter 0.5s ease;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .slab-slot[data-pos="4"] {
+    transform: translate3d(240px, 45px, -200px) rotateY(-42deg) scale(0.72);
+  }
+}
+
+@media (min-width: 1024px) {
+  .slab-slot[data-pos="4"] {
+    transform: translate3d(330px, 55px, -220px) rotateY(-42deg) scale(0.75);
+  }
 }

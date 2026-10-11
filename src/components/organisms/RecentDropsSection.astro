@@ -4,127 +4,305 @@ interface Props {
 }
 
 const { class: className = '' } = Astro.props;
+
+// Lista de cartas graduadas descubiertas recientemente
+const dropCards = [
+  {
+    id: 'tyler-shough-1',
+    title: '2025 TOPPS RISE • TYLER SHOUGH RC AUTO',
+    specs: 'AUTO ON-CARD • SERIADO 1/1 • CALIFICACIÓN GEM MINT 10',
+    imageUrl: '/src/assets/tylersough_slab.png',
+    link: '#paquetes'
+  },
+  {
+    id: 'tyler-shough-2',
+    title: '2025 TOPPS RESURGENCE • TYLER SHOUGH GOLD REFRACTOR',
+    specs: 'REFRACTOR ORO • SERIADO /10 • PSA 10 GEM MINT',
+    imageUrl: '/src/assets/tylersough_slab.png',
+    link: '#paquetes'
+  },
+  {
+    id: 'tyler-shough-3',
+    title: '2025 TOPPS CHROME • TYLER SHOUGH ROOKIE SUPERFRACTOR',
+    specs: 'SUPERFRACTOR 1/1 • CERTIFICADO BGS 9.5 • AUTÓGRAFO ORO',
+    imageUrl: '/src/assets/tylersough_slab.png',
+    link: '#paquetes'
+  },
+  {
+    id: 'tyler-shough-4',
+    title: '2025 TOPPS RISE • TYLER SHOUGH NEON INITIATES',
+    specs: 'PARALELO NEON • SERIADO /25 • SGC 10 PRISTINE',
+    imageUrl: '/src/assets/tylersough_slab.png',
+    link: '#paquetes'
+  },
+  {
+    id: 'tyler-shough-5',
+    title: '2025 TOPPS RESURGENCE • TYLER SHOUGH BLACK STATIC',
+    specs: 'BLACK STATIC SHORT PRINT • PSA 10 GEM MINT',
+    imageUrl: '/src/assets/tylersough_slab.png',
+    link: '#paquetes'
+  }
+];
 ---
 
-<section id="drops" class={`w-full bg-[#111111] py-28 border-b border-[#2c2c2c] overflow-hidden ${className}`}>
+<section id="drops" class={`w-full bg-[#111111] py-20 sm:py-28 border-b border-[#2c2c2c] overflow-hidden ${className}`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     
     <!-- Eyebrow & Título Centrado en Bebas Neue -->
-    <div class="mb-14">
+    <div class="mb-10 sm:mb-14">
       <span class="text-xs font-mono font-medium tracking-[0.3em] text-[#8E8E8E] uppercase block mb-2 select-none">
         DROPS RECIENTES
       </span>
-      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#EDE4BE] tracking-wide uppercase leading-none select-none mb-3">
+      <h2 class="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-[#EDE4BE] tracking-wide uppercase leading-none select-none mb-3">
         ALGUIEN ACABA DE ENCONTRAR ESTO
       </h2>
-      <p class="text-xs sm:text-sm font-mono tracking-[0.2em] text-[#6E6E6E] uppercase select-none">
+      <p class="text-[11px] sm:text-xs md:text-sm font-mono tracking-[0.2em] text-[#6E6E6E] uppercase select-none px-4">
         CARTAS DE ÉLITE DESCUBIERTAS EN NUESTROS LIVE BREAKS
       </p>
     </div>
 
-    <!-- Vitrina Coverflow en Arco 3D (5 Graded Slabs en Perspectiva) -->
-    <div class="relative w-full max-w-5xl mx-auto flex items-center justify-center py-6 slab-coverflow-container">
-      <div class="flex items-center justify-center -space-x-12 sm:-space-x-16 md:-space-x-20 overflow-visible">
-        
-        <!-- 1. Slab Extremo Izquierdo -->
-        <div class="w-[140px] sm:w-[190px] md:w-[230px] slab-coverflow-far-left transition-all duration-500">
-          <img
-            src="/src/assets/tylersough_slab.png"
-            alt="Tyler Shough RC Slab Graduado 1"
-            class="w-full h-auto object-contain drop-shadow-2xl"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- 2. Slab Izquierdo Intermedio -->
-        <div class="w-[160px] sm:w-[220px] md:w-[270px] slab-coverflow-left transition-all duration-500">
-          <img
-            src="/src/assets/tylersough_slab.png"
-            alt="Tyler Shough RC Slab Graduado 2"
-            class="w-full h-auto object-contain drop-shadow-2xl"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- 3. Slab Central (Destacado, Iluminado, 100% Opacidad) -->
-        <div class="w-[200px] sm:w-[270px] md:w-[330px] slab-coverflow-center transition-all duration-500 cursor-pointer">
-          <img
-            src="/src/assets/tylersough_slab.png"
-            alt="2025 Topps Rise Tyler Shough RC Auto Gem Mint 10"
-            class="w-full h-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.95)]"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-
-        <!-- 4. Slab Derecho Intermedio -->
-        <div class="w-[160px] sm:w-[220px] md:w-[270px] slab-coverflow-right transition-all duration-500">
-          <img
-            src="/src/assets/tylersough_slab.png"
-            alt="Tyler Shough RC Slab Graduado 4"
-            class="w-full h-auto object-contain drop-shadow-2xl"
-            loading="lazy"
-          />
-        </div>
-
-        <!-- 5. Slab Extremo Derecho -->
-        <div class="w-[140px] sm:w-[190px] md:w-[230px] slab-coverflow-far-right transition-all duration-500">
-          <img
-            src="/src/assets/tylersough_slab.png"
-            alt="Tyler Shough RC Slab Graduado 5"
-            class="w-full h-auto object-contain drop-shadow-2xl"
-            loading="lazy"
-          />
-        </div>
-
+    <!-- Vitrina Coverflow en Arco 3D Interactiva (Optimizado para Touch en iPhone) -->
+    <div
+      id="slab-carousel-root"
+      class="relative w-full max-w-4xl mx-auto flex items-center justify-center py-4 sm:py-8 slab-coverflow-container select-none cursor-grab active:cursor-grabbing"
+      aria-roledescription="carrusel 3D de cartas graduadas"
+    >
+      <!-- Altura base fluida para el carrusel 3D -->
+      <div class="relative w-full h-[340px] sm:h-[420px] md:h-[480px] flex items-center justify-center">
+        {dropCards.map((card, idx) => (
+          <div
+            class="slab-slot w-[160px] sm:w-[220px] md:w-[280px]"
+            data-index={idx}
+            data-pos={idx}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={card.title}
+          >
+            <img
+              src={card.imageUrl}
+              alt={card.title}
+              class="w-full h-auto object-contain pointer-events-none drop-shadow-2xl"
+              loading={idx === 2 ? 'eager' : 'lazy'}
+              draggable="false"
+            />
+          </div>
+        ))}
       </div>
     </div>
 
     <!-- Metadatos de la Carta Central y Controles (+20% Escala & Smooth Animations) -->
-    <div class="mt-10 flex flex-col items-center gap-5">
-      <!-- Título de la carta (+20% más grande, brillo sutil) -->
-      <h3 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[54px] text-[#EDE4BE] tracking-widest uppercase leading-none transition-all duration-300 drop-shadow-[0_4px_20px_rgba(237,228,190,0.15)] hover:text-white">
-        2025 TOPPS RISE • TYLER SHOUGH RC AUTO
+    <div class="mt-6 sm:mt-8 flex flex-col items-center gap-4 sm:gap-5 px-4">
+      <!-- Título dinámico de la carta activa (+20% más grande, brillo sutil) -->
+      <h3
+        id="slab-active-title"
+        class="font-heading text-2xl sm:text-4xl md:text-5xl lg:text-[52px] text-[#EDE4BE] tracking-widest uppercase leading-tight transition-all duration-300 drop-shadow-[0_4px_20px_rgba(237,228,190,0.15)] hover:text-white min-h-[1.2em]"
+      >
+        {dropCards[2].title}
       </h3>
 
-      <!-- Subtítulo / Especificaciones (+20% escala) -->
-      <p class="text-xs sm:text-sm md:text-base font-mono tracking-[0.25em] text-[#A0A0A0] uppercase font-medium">
+      <!-- Subtítulo / Especificaciones dinámicas (+20% escala) -->
+      <p
+        id="slab-active-specs"
+        class="text-xs sm:text-sm md:text-base font-mono tracking-[0.2em] sm:tracking-[0.25em] text-[#A0A0A0] uppercase font-medium min-h-[1.2em]"
+      >
         AUTO ON-CARD <span class="text-[#A72027] mx-1">•</span> SERIADO 1/1 <span class="text-[#A72027] mx-1">•</span> CALIFICACIÓN GEM MINT
       </p>
 
       <!-- Botones de Navegación Flechas y CTA Tienda (+20% escala y animaciones suaves premium) -->
-      <div class="flex items-center gap-6 sm:gap-8 mt-4">
-        <!-- Flecha Izquierda (+20%: w-10 h-10, icono SVG suave) -->
+      <div class="flex items-center gap-4 sm:gap-8 mt-2 sm:mt-4">
+        <!-- Flecha Izquierda (+20%: w-11 h-11 en iPhone / w-12 h-12 en desktop) -->
         <button
+          id="slab-prev-btn"
           type="button"
-          class="w-10 h-10 rounded-full border border-[#444444] bg-[#141414]/80 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
-          aria-label="Anterior carta"
+          class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#444444] bg-[#141414]/90 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
+          aria-label="Carta anterior"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
 
-        <!-- CTA Principal (+20% escala: px-10 py-3.5, font text-lg a text-xl, suave brillo y elevación) -->
+        <!-- CTA Principal (+20% escala: px-8 py-3 en iPhone / px-10 py-3.5 en desktop, suave elevación) -->
         <a
+          id="slab-active-cta"
           href="#paquetes"
-          class="inline-flex items-center justify-center px-10 py-3.5 rounded-full font-heading text-lg sm:text-xl tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_10px_25px_rgba(237,228,190,0.2)] hover:shadow-[0_15px_35px_rgba(255,255,255,0.3)] font-medium"
+          class="inline-flex items-center justify-center px-7 sm:px-10 py-3 sm:py-3.5 rounded-full font-heading text-base sm:text-xl tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-[0_10px_25px_rgba(237,228,190,0.2)] hover:shadow-[0_15px_35px_rgba(255,255,255,0.3)] font-medium"
         >
           VER EN LA TIENDA
         </a>
 
-        <!-- Flecha Derecha (+20%: w-10 h-10, icono SVG suave) -->
+        <!-- Flecha Derecha (+20%: w-10 h-10 en iPhone / w-12 h-12 en desktop) -->
         <button
+          id="slab-next-btn"
           type="button"
-          class="w-10 h-10 rounded-full border border-[#444444] bg-[#141414]/80 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
+          class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#444444] bg-[#141414]/90 text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black hover:border-[#EDE4BE] hover:scale-110 active:scale-95 flex items-center justify-center transition-all duration-300 shadow-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE]"
           aria-label="Siguiente carta"
         >
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
           </svg>
         </button>
+      </div>
+
+      <!-- Indicadores de posición táctil tipo puntos para iPhone -->
+      <div id="slab-dots" class="flex items-center gap-2 mt-4 sm:hidden" aria-hidden="true">
+        {dropCards.map((_, idx) => (
+          <div
+            class={`w-2 h-2 rounded-full transition-all duration-300 ${idx === 2 ? 'bg-[#EDE4BE] w-4' : 'bg-[#333333]'}`}
+            data-dot={idx}
+          ></div>
+        ))}
       </div>
     </div>
 
   </div>
 </section>
+
+<script>
+  // Script para Coverflow 3D dinámico, Swipe Touch nativo y actualización de metadata
+  const cardsData = [
+    {
+      title: '2025 TOPPS RISE • TYLER SHOUGH RC AUTO',
+      specs: 'AUTO ON-CARD • SERIADO 1/1 • CALIFICACIÓN GEM MINT 10'
+    },
+    {
+      title: '2025 TOPPS RESURGENCE • TYLER SHOUGH GOLD REFRACTOR',
+      specs: 'REFRACTOR ORO • SERIADO /10 • PSA 10 GEM MINT'
+    },
+    {
+      title: '2025 TOPPS CHROME • TYLER SHOUGH ROOKIE SUPERFRACTOR',
+      specs: 'SUPERFRACTOR 1/1 • CERTIFICADO BGS 9.5 • AUTÓGRAFO ORO'
+    },
+    {
+      title: '2025 TOPPS RISE • TYLER SHOUGH NEON INITIATES',
+      specs: 'PARALELO NEON • SERIADO /25 • SGC 10 PRISTINE'
+    },
+    {
+      title: '2025 TOPPS RESURGENCE • TYLER SHOUGH BLACK STATIC',
+      specs: 'BLACK STATIC SHORT PRINT • PSA 10 GEM MINT'
+    }
+  ];
+
+  const totalCards = cardsData.length;
+  // centerIndex define cuál carta se encuentra en la posición central (pos = 2)
+  let centerIndex = 2;
+
+  const carouselRoot = document.getElementById('slab-carousel-root');
+  const prevBtn = document.getElementById('slab-prev-btn');
+  const nextBtn = document.getElementById('slab-next-btn');
+  const titleEl = document.getElementById('slab-active-title');
+  const specsEl = document.getElementById('slab-active-specs');
+  const slots = document.querySelectorAll<HTMLElement>('.slab-slot');
+  const dots = document.querySelectorAll<HTMLElement>('#slab-dots [data-dot]');
+
+  function updateCarousel(isAnimated = true) {
+    slots.forEach((slot) => {
+      const cardIdx = Number(slot.getAttribute('data-index')) || 0;
+      // Calcular la posición relativa en el arco [-2, -1, 0, 1, 2] mapeada a [0, 1, 2, 3, 4]
+      let diff = cardIdx - centerIndex;
+      while (diff < -2) diff += totalCards;
+      while (diff > 2) diff -= totalCards;
+
+      const pos = diff + 2; // pos 2 es el centro
+      slot.setAttribute('data-pos', pos.toString());
+      slot.setAttribute('aria-hidden', pos === 2 ? 'false' : 'true');
+    });
+
+    // Actualizar Textos con fade sutil
+    if (titleEl && specsEl) {
+      if (isAnimated) {
+        titleEl.style.opacity = '0';
+        specsEl.style.opacity = '0';
+        setTimeout(() => {
+          titleEl.textContent = cardsData[centerIndex].title;
+          specsEl.textContent = cardsData[centerIndex].specs;
+          titleEl.style.opacity = '1';
+          specsEl.style.opacity = '1';
+        }, 150);
+      } else {
+        titleEl.textContent = cardsData[centerIndex].title;
+        specsEl.textContent = cardsData[centerIndex].specs;
+      }
+    }
+
+    // Actualizar Dots móviles
+    dots.forEach((dot) => {
+      const dotIdx = Number(dot.getAttribute('data-dot'));
+      if (dotIdx === centerIndex) {
+        dot.className = 'w-4 h-2 rounded-full bg-[#EDE4BE] transition-all duration-300';
+      } else {
+        dot.className = 'w-2 h-2 rounded-full bg-[#333333] transition-all duration-300';
+      }
+    });
+  }
+
+  function moveNext() {
+    centerIndex = (centerIndex + 1) % totalCards;
+    updateCarousel();
+  }
+
+  function movePrev() {
+    centerIndex = (centerIndex - 1 + totalCards) % totalCards;
+    updateCarousel();
+  }
+
+  // Click en botones
+  nextBtn?.addEventListener('click', moveNext);
+  prevBtn?.addEventListener('click', movePrev);
+
+  // Click directo en cartas laterales para traerlas al frente
+  slots.forEach((slot) => {
+    slot.addEventListener('click', () => {
+      const pos = Number(slot.getAttribute('data-pos'));
+      if (pos === 1) movePrev();
+      if (pos === 3) moveNext();
+    });
+  });
+
+  // Soporte Touch Swipe para iPhone / iOS Gestures
+  let touchStartX = 0;
+  let touchEndX = 0;
+  const minSwipeDistance = 40;
+
+  carouselRoot?.addEventListener(
+    'touchstart',
+    (e: TouchEvent) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true }
+  );
+
+  carouselRoot?.addEventListener(
+    'touchend',
+    (e: TouchEvent) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    },
+    { passive: true }
+  );
+
+  function handleSwipe() {
+    const diff = touchEndX - touchStartX;
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swipe derecha -> carta previa
+        movePrev();
+      } else {
+        // Swipe izquierda -> carta siguiente
+        moveNext();
+      }
+    }
+  }
+
+  // Teclado accesible (flechas derecha e izquierda)
+  window.addEventListener('keydown', (e) => {
+    const rect = carouselRoot?.getBoundingClientRect();
+    if (rect && rect.top < window.innerHeight && rect.bottom > 0) {
+      if (e.key === 'ArrowRight') moveNext();
+      if (e.key === 'ArrowLeft') movePrev();
+    }
+  });
+
+  // Inicializar estado
+  updateCarousel(false);
+</script>
