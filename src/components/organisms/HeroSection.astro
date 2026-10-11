@@ -6,7 +6,7 @@ interface Props {
 const { class: className = '' } = Astro.props;
 ---
 
-<section class={`relative w-full overflow-hidden bg-[#111111] pt-12 pb-20 sm:pt-16 sm:pb-28 md:pt-20 md:pb-36 border-b border-[#2c2c2c] ${className}`}>
+<section id="hero-section" class={`relative w-full overflow-hidden bg-[#111111] pt-10 pb-16 sm:pt-16 sm:pb-28 md:pt-20 md:pb-36 border-b border-[#2c2c2c] ${className}`}>
   <!-- Destello / Spotlight Ambiental Central (Figma Vibe) -->
   <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
     <div class="w-[600px] h-[600px] bg-[#EDE4BE]/5 rounded-full blur-[160px] -translate-y-20"></div>
@@ -20,42 +20,57 @@ const { class: className = '' } = Astro.props;
     </h1>
 
     <!-- Subtítulo con Puntos de Separación -->
-    <p class="text-[11px] sm:text-sm md:text-base font-mono font-medium tracking-[0.25em] sm:tracking-[0.35em] text-[#C4C4C4] uppercase mb-8 sm:mb-16 select-none">
+    <p class="text-[11px] sm:text-sm md:text-base font-mono font-medium tracking-[0.25em] sm:tracking-[0.35em] text-[#C4C4C4] uppercase mb-6 sm:mb-16 select-none">
       BREAKS • CAJAS • SLAPS
     </p>
 
-    <!-- Showcase Visual de Cartas en Abanico 3D (Siempre visible y perfectamente encuadrado) -->
-    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero overflow-visible">
-      <div class="relative flex items-center justify-center w-full min-h-[340px] sm:min-h-[440px] md:min-h-[520px]">
+    <!-- Showcase Visual de Cartas en Abanico 3D con Desagrupación Animada -->
+    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero overflow-visible select-none">
+      <div class="relative flex items-center justify-center w-full min-h-[320px] sm:min-h-[440px] md:min-h-[520px]">
         
-        <!-- 1. Carta Izquierda: Jugador NBA (Visible al 100%, inclinada) -->
-        <div class="absolute -left-2 sm:left-2 md:left-6 top-5 sm:top-6 w-[170px] sm:w-[270px] md:w-[325px] hero-fan-left cursor-pointer group">
+        <!-- 1. Carta Izquierda: Jugador NBA (Se desagrupa hacia la izquierda) -->
+        <div
+          id="hero-card-left"
+          class="absolute left-1/2 -translate-x-1/2 top-4 sm:top-6 w-[170px] sm:w-[270px] md:w-[325px] cursor-pointer group will-change-transform"
+          style="transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 10;"
+        >
           <img
             src="/src/assets/nbahero.png"
             alt="Carta coleccionable NBA Basketball Gold Refractor"
             class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_40px_rgba(0,0,0,0.92)]"
             loading="eager"
+            draggable="false"
           />
         </div>
 
-        <!-- 2. Carta Central: Erling Haaland (Protagonista elevada) -->
-        <div class="relative w-[190px] sm:w-[280px] md:w-[350px] hero-fan-center cursor-pointer group">
+        <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada) -->
+        <div
+          id="hero-card-center"
+          class="relative w-[190px] sm:w-[280px] md:w-[350px] cursor-pointer group will-change-transform"
+          style="transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 25;"
+        >
           <img
             src="/src/assets/herohaland.png"
             alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor"
             class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_30px_60px_rgba(0,0,0,0.98)]"
             loading="eager"
             fetchpriority="high"
+            draggable="false"
           />
         </div>
 
-        <!-- 3. Carta Derecha: Josh Allen (Visible al 100%, inclinada) -->
-        <div class="absolute -right-2 sm:right-2 md:right-6 top-5 sm:top-6 w-[170px] sm:w-[270px] md:w-[325px] hero-fan-right cursor-pointer group">
+        <!-- 3. Carta Derecha: Josh Allen (Se desagrupa hacia la derecha) -->
+        <div
+          id="hero-card-right"
+          class="absolute left-1/2 -translate-x-1/2 top-4 sm:top-6 w-[170px] sm:w-[270px] md:w-[325px] cursor-pointer group will-change-transform"
+          style="transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); z-index: 10;"
+        >
           <img
             src="/src/assets/joshallenhero.png"
             alt="Carta coleccionable Buffalo Bills Josh Allen Prizm"
             class="w-full h-auto object-contain rounded-2xl group-hover:scale-105 transition-all duration-500 drop-shadow-[0_20px_40px_rgba(0,0,0,0.92)]"
             loading="eager"
+            draggable="false"
           />
         </div>
 
@@ -63,3 +78,120 @@ const { class: className = '' } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  // Control de desagrupación de cartas al primer scroll
+  // Mientras las cartas se abren hacia los lados, se retiene el scroll de la página
+  // para que permanezcan 100% visibles en el viewport. Una vez abiertas, el scroll se libera.
+  const elLeft = document.getElementById('hero-card-left');
+  const elCenter = document.getElementById('hero-card-center');
+  const elRight = document.getElementById('hero-card-right');
+
+  if (elLeft && elCenter && elRight) {
+    const cardLeft: HTMLElement = elLeft;
+    const cardCenter: HTMLElement = elCenter;
+    const cardRight: HTMLElement = elRight;
+
+    let animProgress = 0; // 0 = apiladas al centro, 1 = completamente abiertas a los lados
+    let isFullyOpened = false;
+
+    const isMobile = () => window.innerWidth < 640;
+
+    function renderCards(progress: number) {
+      const mobile = isMobile();
+      // Distancia máxima que viaja cada carta lateral desde el centro
+      const maxTx = mobile ? 85 : 175;
+      const txLeft = -(progress * maxTx);
+      const txRight = (progress * maxTx);
+      
+      const rotLeft = -(progress * 13);
+      const rotRight = (progress * 13);
+      
+      const tyLateral = progress * (mobile ? 18 : 24);
+      const scaleLateral = 0.92 + (progress * 0.04);
+      const tyCenter = -(progress * (mobile ? 12 : 16));
+      const scaleCenter = 1.0 + (progress * 0.05);
+
+      cardLeft.style.transform = `translate3d(calc(-50% + ${txLeft}px), ${tyLateral}px, 0) rotate(${rotLeft}deg) scale(${scaleLateral})`;
+      cardRight.style.transform = `translate3d(calc(-50% + ${txRight}px), ${tyLateral}px, 0) rotate(${rotRight}deg) scale(${scaleLateral})`;
+      cardCenter.style.transform = `translate3d(0, ${tyCenter}px, 0) scale(${scaleCenter})`;
+    }
+
+    // Inicialmente mostrar agrupadas al centro
+    renderCards(0);
+
+    // Animación suave de apertura automática inicial para garantizar visibilidad inmediata
+    setTimeout(() => {
+      let start: number | null = null;
+      const duration = 900; // ms
+
+      function step(timestamp: number) {
+        if (!start) start = timestamp;
+        const elapsed = timestamp - start;
+        const p = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        animProgress = eased;
+        renderCards(animProgress);
+
+        if (p < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          isFullyOpened = true;
+        }
+      }
+      window.requestAnimationFrame(step);
+    }, 200);
+
+    // Si el usuario scrollea o desliza antes de que terminen de abrirse,
+    // bloquear el desplazamiento del scroll hasta que las cartas estén 100% abiertas y visibles
+    let touchStartY = 0;
+
+    window.addEventListener(
+      'wheel',
+      (e) => {
+        if (!isFullyOpened && window.scrollY < 80) {
+          if (e.deltaY > 0) {
+            e.preventDefault();
+            animProgress = Math.min(animProgress + 0.35, 1);
+            renderCards(animProgress);
+            if (animProgress >= 1) {
+              isFullyOpened = true;
+            }
+          }
+        }
+      },
+      { passive: false }
+    );
+
+    window.addEventListener(
+      'touchstart',
+      (e: TouchEvent) => {
+        touchStartY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener(
+      'touchmove',
+      (e: TouchEvent) => {
+        if (!isFullyOpened && window.scrollY < 40) {
+          const currentY = e.touches[0].clientY;
+          const diff = touchStartY - currentY;
+          if (diff > 10) {
+            e.preventDefault();
+            animProgress = Math.min(animProgress + 0.35, 1);
+            renderCards(animProgress);
+            if (animProgress >= 1) {
+              isFullyOpened = true;
+            }
+          }
+        }
+      },
+      { passive: false }
+    );
+
+    window.addEventListener('resize', () => {
+      renderCards(animProgress);
+    });
+  }
+</script>
