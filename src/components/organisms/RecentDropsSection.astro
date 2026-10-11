@@ -1,0 +1,139 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<section id="drops" class={`w-full bg-[#111111] py-28 border-b border-[#2c2c2c] overflow-hidden ${className}`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    
+    <!-- Eyebrow & Título Centrado en Bebas Neue -->
+    <div class="mb-14">
+      <span class="text-xs font-mono font-medium tracking-[0.3em] text-[#8E8E8E] uppercase block mb-2 select-none">
+        DROPS RECIENTES
+      </span>
+      <h2 class="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-[#EDE4BE] tracking-wide uppercase leading-none select-none mb-3">
+        ALGUIEN ACABA DE ENCONTRAR ESTO
+      </h2>
+      <p class="text-xs sm:text-sm font-mono tracking-[0.2em] text-[#6E6E6E] uppercase select-none">
+        CARTAS DE ÉLITE DESCUBIERTAS EN NUESTROS LIVE BREAKS
+      </p>
+    </div>
+
+    <!-- Vitrina Coverflow en Arco 3D (5 Graded Slabs en Perspectiva) -->
+    <div class="relative w-full max-w-5xl mx-auto flex items-center justify-center py-6 slab-coverflow-container">
+      <div class="flex items-center justify-center -space-x-12 sm:-space-x-16 md:-space-x-20 overflow-visible">
+        
+        <!-- 1. Slab Extremo Izquierdo -->
+        <div class="w-[140px] sm:w-[190px] md:w-[230px] slab-coverflow-far-left transition-all duration-500">
+          <div class="rounded-2xl bg-[#0a0a0a] border border-[#333333] p-1.5 shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3.125/5]">
+              <img
+                src="/images/cards/NeonInitiates_GoldPowerSurge_TylerShough_FR.jpg"
+                alt="Carta coleccionable 1"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Slab Izquierdo Intermedio -->
+        <div class="w-[160px] sm:w-[220px] md:w-[270px] slab-coverflow-left transition-all duration-500">
+          <div class="rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3.125/5]">
+              <img
+                src="/images/cards/NeonInitiates_GoldPowerSurge_TylerShough_FR.jpg"
+                alt="Carta coleccionable 2"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Slab Central (Destacado, Iluminado, 100% Opacidad) -->
+        <div class="w-[190px] sm:w-[260px] md:w-[320px] slab-coverflow-center transition-all duration-500">
+          <div class="rounded-2xl bg-[#0a0a0a] border-2 border-[#EDE4BE] p-2 shadow-[0_30px_70px_rgba(0,0,0,0.95)]">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3.125/5]">
+              <img
+                src="/images/cards/NeonInitiates_GoldPowerSurge_TylerShough_FR.jpg"
+                alt="2025 Topps Rise Tyler Shough RC Auto"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Slab Derecho Intermedio -->
+        <div class="w-[160px] sm:w-[220px] md:w-[270px] slab-coverflow-right transition-all duration-500">
+          <div class="rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3.125/5]">
+              <img
+                src="/images/cards/NeonInitiates_GoldPowerSurge_TylerShough_FR.jpg"
+                alt="Carta coleccionable 4"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Slab Extremo Derecho -->
+        <div class="w-[140px] sm:w-[190px] md:w-[230px] slab-coverflow-far-right transition-all duration-500">
+          <div class="rounded-2xl bg-[#0a0a0a] border border-[#333333] p-1.5 shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3.125/5]">
+              <img
+                src="/images/cards/NeonInitiates_GoldPowerSurge_TylerShough_FR.jpg"
+                alt="Carta coleccionable 5"
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Metadatos de la Carta Central y Controles -->
+    <div class="mt-8 flex flex-col items-center gap-4">
+      <h3 class="font-heading text-2xl sm:text-3xl md:text-4xl text-[#EDE4BE] tracking-wider uppercase leading-none">
+        2025 TOPPS RISE • TYLER SHOUGH RC AUTO
+      </h3>
+      <p class="text-xs font-mono tracking-widest text-[#8E8E8E] uppercase">
+        AUTO ON-CARD • SERIADO 1/1 • CALIFICACIÓN GEM MINT
+      </p>
+
+      <!-- Botones de Navegación Flechas y CTA Tienda -->
+      <div class="flex items-center gap-6 mt-2">
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full border border-[#444444] text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black flex items-center justify-center transition-colors text-xs font-bold"
+          aria-label="Anterior carta"
+        >
+          &lt;
+        </button>
+
+        <a
+          href="#cards"
+          class="inline-flex items-center justify-center px-8 py-2.5 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white transition-all shadow-md"
+        >
+          VER EN LA TIENDA
+        </a>
+
+        <button
+          type="button"
+          class="w-8 h-8 rounded-full border border-[#444444] text-[#EDE4BE] hover:bg-[#EDE4BE] hover:text-black flex items-center justify-center transition-colors text-xs font-bold"
+          aria-label="Siguiente carta"
+        >
+          &gt;
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>

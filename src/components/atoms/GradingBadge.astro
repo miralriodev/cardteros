@@ -1,0 +1,38 @@
+---
+import type { GradingCompany } from '../../types/cards';
+
+interface Props {
+  company: GradingCompany;
+  grade: string;
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const {
+  company,
+  grade,
+  size = 'md',
+  class: className = ''
+} = Astro.props;
+
+// Estilos visuales emblemáticos de cada casa de graduación
+const badgeStyles = {
+  PSA: 'bg-[#E60000] text-white border-b-2 border-white/40 shadow-[0_2px_8px_rgba(230,0,0,0.3)]',
+  BGS: 'bg-gradient-to-r from-[#D4AF37] to-[#B38F24] text-[#111111] font-black border border-white/30 shadow-[0_2px_8px_rgba(212,175,55,0.3)]',
+  CGC: 'bg-[#0070F3] text-white font-bold border border-white/20 shadow-[0_2px_8px_rgba(0,112,243,0.3)]',
+  SGC: 'bg-[#111111] text-white font-bold border border-white/30 shadow-[0_2px_8px_rgba(0,0,0,0.5)]',
+  RAW: 'bg-[#222836] text-[#D9E2EC] border border-[#3A4456]'
+};
+
+const sizeClasses = {
+  sm: 'text-[10px] px-2 py-0.5 tracking-wider',
+  md: 'text-xs px-2.5 py-1 tracking-wider',
+  lg: 'text-sm px-3.5 py-1.5 tracking-widest'
+};
+---
+
+<div class={`inline-flex items-center gap-1.5 font-mono font-bold uppercase rounded-[4px] select-none ${badgeStyles[company]} ${sizeClasses[size]} ${className}`}>
+  <span>{company}</span>
+  <span class="opacity-40">|</span>
+  <span class="text-white drop-shadow-sm font-black">{grade}</span>
+</div>

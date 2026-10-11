@@ -1,0 +1,50 @@
+---
+import CardterosLogo from '../atoms/CardterosLogo.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<footer class={`w-full bg-[#111111] py-14 border-t border-[#2c2c2c] text-[#C4C4C4] ${className}`}>
+  <div class="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-8">
+    
+    <!-- Logo Vintage Script Izquierda -->
+    <div class="flex items-center">
+      <a href="/" class="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#EDE4BE] rounded-sm" aria-label="Cardteros Inicio">
+        <CardterosLogo size="lg" />
+      </a>
+    </div>
+
+    <!-- Enlaces Horizontales Derecha (Figma Exact Match) -->
+    <nav class="flex flex-wrap items-center justify-center gap-8 md:gap-12" aria-label="Navegación pie de página">
+      <a
+        href="#acerca"
+        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#EDE4BE] hover:text-white transition-colors"
+      >
+        ACERCA
+      </a>
+      <a
+        href="#drops"
+        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#EDE4BE] hover:text-white transition-colors"
+      >
+        DROPS
+      </a>
+      <a
+        href="#terminos"
+        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#EDE4BE] hover:text-white transition-colors"
+      >
+        TÉRMINOS DE SERVICIO
+      </a>
+      <a
+        href="#faq"
+        class="text-xs font-mono font-bold tracking-[0.25em] uppercase text-[#EDE4BE] hover:text-white transition-colors"
+      >
+        FAQ
+      </a>
+    </nav>
+
+  </div>
+</footer>

@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/* ==========================================================================
+   1. TAILWIND CSS V4 THEME CONFIGURATION
+   ========================================================================== */
+@theme {
+  /* Tipografías Oficiales CARDTEROS (Figma Match) */
+  --font-heading: 'Bebas Neue', -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Paleta Cromática Oficial Figma */
+  --color-brand-cream: #ede4be;
+  --color-brand-cream-muted: #c9c09d;
+  --color-brand-red: #a72027;
+  --color-brand-red-dark: #82141a;
+  --color-brand-dark: #111111;
+  --color-brand-surface: #181818;
+  --color-brand-card: #000000;
+  --color-brand-border: #2c2c2c;
+  --color-brand-gray: #575757;
+  --color-brand-gray-text: #8e8e8e;
+  --color-brand-white: #ffffff;
+}
+
+/* ==========================================================================
+   2. REGLAS BASE Y ACCESIBILIDAD (WCAG 2.2 AA)
+   ========================================================================== */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scrollbar-gutter: stable;
+    overflow-x: hidden;
+    max-width: 100%;
+    background-color: #111111;
+    color: #ede4be;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #111111;
+    color: #ede4be;
+    min-height: 100vh;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 0.02em;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 0.95;
+  }
+
+  :focus-visible {
+    outline: 2px solid #ede4be !important;
+    outline-offset: 3px !important;
+    box-shadow: 0 0 12px rgba(237, 228, 190, 0.4);
+  }
+
+  ::selection {
+    background-color: #a72027;
+    color: #ede4be;
+  }
+}
+
+/* ==========================================================================
+   3. PERSPECTIVA DE ABANICO DE CARTAS (HERO FAN 3D)
+   ========================================================================== */
+.perspective-hero {
+  perspective: 1200px;
+}
+
+.hero-fan-left {
+  transform: rotate(-14deg) translateY(28px) scale(0.92);
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: drop-shadow(-15px 25px 35px rgba(0, 0, 0, 0.9));
+}
+
+.hero-fan-center {
+  transform: rotate(0deg) translateY(-10px) scale(1.06);
+  z-index: 25;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 40px rgba(237, 228, 190, 0.15));
+}
+
+.hero-fan-right {
+  transform: rotate(14deg) translateY(28px) scale(0.92);
+  transform-origin: bottom center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+  filter: drop-shadow(15px 25px 35px rgba(0, 0, 0, 0.9));
+}
+
+.hero-fan-left:hover {
+  transform: rotate(-8deg) translateY(0px) scale(0.98) !important;
+  z-index: 30 !important;
+}
+
+.hero-fan-center:hover {
+  transform: rotate(0deg) translateY(-25px) scale(1.1) !important;
+  z-index: 30 !important;
+}
+
+.hero-fan-right:hover {
+  transform: rotate(8deg) translateY(0px) scale(0.98) !important;
+  z-index: 30 !important;
+}
+
+/* ==========================================================================
+   4. VITRINA COVERFLOW EN ARCO (DROPS RECIENTES 3D CAROUSEL)
+   ========================================================================== */
+.slab-coverflow-container {
+  perspective: 1400px;
+}
+
+.slab-coverflow-far-left {
+  transform: rotateY(38deg) scale(0.72) translateX(40px);
+  opacity: 0.35;
+  filter: blur(1.5px) brightness(0.6);
+  z-index: 5;
+}
+
+.slab-coverflow-left {
+  transform: rotateY(24deg) scale(0.85) translateX(20px);
+  opacity: 0.75;
+  filter: brightness(0.8);
+  z-index: 10;
+}
+
+.slab-coverflow-center {
+  transform: rotateY(0deg) scale(1.05);
+  opacity: 1;
+  z-index: 20;
+  filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.95)) drop-shadow(0 0 35px rgba(237, 228, 190, 0.25));
+}
+
+.slab-coverflow-right {
+  transform: rotateY(-24deg) scale(0.85) translateX(-20px);
+  opacity: 0.75;
+  filter: brightness(0.8);
+  z-index: 10;
+}
+
+.slab-coverflow-far-right {
+  transform: rotateY(-38deg) scale(0.72) translateX(-40px);
+  opacity: 0.35;
+  filter: blur(1.5px) brightness(0.6);
+  z-index: 5;
+}

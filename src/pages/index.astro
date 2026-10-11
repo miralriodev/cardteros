@@ -1,0 +1,25 @@
+---
+import MainLayout from '../components/templates/MainLayout.astro';
+import HeroSection from '../components/organisms/HeroSection.astro';
+import PacksSection from '../components/organisms/PacksSection.astro';
+import RecentDropsSection from '../components/organisms/RecentDropsSection.astro';
+import PackageIncludesSection from '../components/organisms/PackageIncludesSection.astro';
+import CtaBannerSection from '../components/organisms/CtaBannerSection.astro';
+---
+
+<MainLayout title="CARDTEROS - Ya Llegamos | Breaks, Cajas y Slabs">
+  <!-- 1. Hero Section Principal ("YA LLEGAMOS") -->
+  <HeroSection />
+
+  <!-- 2. Sección Cajas / Sobres ("CADA SOBRE GUARDA UNA CARTA PARA TI.") -->
+  <PacksSection />
+
+  <!-- 3. Sección Drops Recientes ("ALGUIEN ACABA DE ENCONTRAR ESTO") -->
+  <RecentDropsSection />
+
+  <!-- 4. Sección Beneficios ("TODO PAQUETE TENDRÁ SU CARDTERO") -->
+  <PackageIncludesSection />
+
+  <!-- 5. Sección Cierre / Banner Masivo ("TU SIGUIENTE SOBRE TE ESPERA") -->
+  <CtaBannerSection />
+</MainLayout>

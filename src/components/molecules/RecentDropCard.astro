@@ -1,0 +1,78 @@
+---
+import GradingBadge from '../atoms/GradingBadge.astro';
+import type { GradingCompany } from '../../types/cards';
+
+interface Props {
+  athlete: string;
+  cardName: string;
+  serialNumber?: string;
+  gradingCompany: GradingCompany;
+  grade: string;
+  imageUrl: string;
+  foundBy?: string;
+  breakId?: string;
+  estimatedValueMxn?: number;
+}
+
+const {
+  athlete,
+  cardName,
+  serialNumber = '1/1',
+  gradingCompany,
+  grade,
+  imageUrl,
+  foundBy = '@collector_cdmx',
+  breakId = 'Live Break #142',
+  estimatedValueMxn
+} = Astro.props;
+
+const formattedValue = estimatedValueMxn ? new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+  maximumFractionDigits: 0
+}).format(estimatedValueMxn) : null;
+---
+
+<div class="relative flex flex-col rounded-2xl bg-black border border-[#575757]/60 hover:border-[#EDE4BE] p-4 transition-all duration-300 hover:shadow-[0_20px_45px_rgba(0,0,0,0.9),0_0_25px_rgba(237,228,190,0.18)] group">
+  <!-- Cabecera de la Carta con Grading Badge y Serial -->
+  <div class="flex items-center justify-between gap-2 mb-3">
+    <GradingBadge company={gradingCompany} grade={grade} size="sm" />
+    <span class="inline-flex items-center px-2 py-0.5 rounded-sm font-mono text-[10px] font-bold text-[#EDE4BE] bg-[#222222] border border-[#575757]/40">
+      {serialNumber}
+    </span>
+  </div>
+
+  <!-- Imagen de la Carta Coleccionable -->
+  <div class="relative w-full aspect-[2.5/3.5] rounded-xl overflow-hidden bg-[#0d0d0d] flex items-center justify-center p-2 mb-4 group-hover:bg-[#141414] transition-colors border border-[#575757]/20">
+    <img
+      src={imageUrl}
+      alt={`${athlete} - ${cardName}`}
+      class="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_12px_24px_rgba(0,0,0,0.85)]"
+      loading="lazy"
+    />
+  </div>
+
+  <!-- Metadata y Datos de Pull Comunitario -->
+  <div class="flex flex-col gap-1 mb-3">
+    <h3 class="font-heading font-black text-base text-white group-hover:text-[#EDE4BE] transition-colors truncate">
+      {athlete}
+    </h3>
+    <p class="text-xs text-[#A0A0A0] font-medium truncate">
+      {cardName}
+    </p>
+  </div>
+
+  <!-- Pie con info de quién lo sacó y valor -->
+  <div class="pt-3 border-t border-[#575757]/30 flex items-center justify-between text-[11px] font-mono text-[#888888]">
+    <div class="flex flex-col">
+      <span class="text-[#A72027] font-bold">{breakId}</span>
+      <span class="text-[#C4C4C4]">{foundBy}</span>
+    </div>
+    {formattedValue && (
+      <div class="text-right">
+        <span class="text-[9px] uppercase block">Est. Comp</span>
+        <span class="text-[#EDE4BE] font-black text-xs">{formattedValue}</span>
+      </div>
+    )}
+  </div>
+</div>

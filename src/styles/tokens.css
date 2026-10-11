@@ -1,0 +1,60 @@
+/**
+ * CARDTEROS Design Tokens - Official Figma Esscala Specification
+ * Paleta Oficial:
+ * - Primario (Crema / Acento tipográfico): #EDE4BE
+ * - Secundario (Rojo deportivo / Acentos): #A72027
+ * - Gris para bordes y divisiones sutiles: #575757 / #333333
+ * - Fondo oscuro principal / Superficie: #141414 / #111111 / #0a0a0a
+ * - Fondos de cards: #000000 (negro puro)
+ */
+
+:root {
+  /* ==========================================================================
+     1. COLOR SYSTEM (PRIMITIVOS Y SEMÁNTICOS)
+     ========================================================================== */
+  --cardteros-color-cream: #ede4be;
+  --cardteros-color-cream-muted: #c9c09d;
+  --cardteros-color-red: #a72027;
+  --cardteros-color-red-dark: #82141a;
+  --cardteros-color-gray-border: #383838;
+  --cardteros-color-gray-subtle: #575757;
+  --cardteros-color-gray-text: #8e8e8e;
+  --cardteros-color-dark-bg: #111111;
+  --cardteros-color-dark-surface: #181818;
+  --cardteros-color-black: #000000;
+  --cardteros-color-white: #ffffff;
+
+  /* Semantic Backgrounds */
+  --color-bg-primary: #111111;
+  --color-bg-surface: #181818;
+  --color-bg-card: #000000;
+  --color-bg-elevated: #202020;
+  --color-bg-cream: var(--cardteros-color-cream);
+  --color-bg-red: var(--cardteros-color-red);
+
+  /* Semantic Typography */
+  --color-text-cream: var(--cardteros-color-cream);
+  --color-text-muted: var(--cardteros-color-gray-text);
+  --color-text-primary: #ffffff;
+  --color-text-accent: var(--cardteros-color-red);
+
+  /* Semantic Borders */
+  --color-border-card: #2c2c2c;
+  --color-border-subtle: #383838;
+  --color-border-cream: rgba(237, 228, 190, 0.4);
+
+  /* ==========================================================================
+     2. TYPOGRAPHY SYSTEM
+     ========================================================================== */
+  --font-heading: 'Bebas Neue', 'Anton', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --space-unit: 8px;
+
+  /* Border Radii */
+  --radius-pill: 9999px;
+  --radius-card: 18px;
+  --radius-sm: 8px;
+}

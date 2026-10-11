@@ -1,0 +1,71 @@
+---
+import PackCard from '../molecules/PackCard.astro';
+
+const packsData = [
+  {
+    id: 'pack-resurgence-hobby',
+    title: '2025 TOPPS RESURGENCE FOOTBALL',
+    subtitle: 'Hobby Box Sellada de Fábrica (14 Sobres)',
+    priceMxn: 7200,
+    imageUrl: '/images/cards/25TRFB_FGC006838_HBX_OPEN-scaled.webp'
+  },
+  {
+    id: 'pack-resurgence-breaker',
+    title: '2025 TOPPS RESURGENCE BREAKER',
+    subtitle: 'Exclusiva para Box Breaks (Caja Sellada)',
+    priceMxn: 8900,
+    imageUrl: '/images/cards/25TRFB_FGC006837_BREAKER_BX-1536x1090.webp'
+  },
+  {
+    id: 'pack-topps-value',
+    title: '2026 TOPPS VALUE BOX PACK',
+    subtitle: 'Blaster Box Colección Retail (7 Sobres)',
+    priceMxn: 1850,
+    imageUrl: '/images/cards/232e8dccbcd35f9f75ecd91c9ca17eed6816c5b8_PL26_VB1Z_VALUE_BOX.webp'
+  },
+  {
+    id: 'pack-resurgence-mega',
+    title: '2025 TOPPS RESURGENCE MEGA BOX',
+    subtitle: 'Caja Edición Coleccionista con Sobres Silver',
+    priceMxn: 3400,
+    imageUrl: '/images/cards/25TRFB_FGC6844SE_6843EA_6842CEE_VBX-2048x2048.webp'
+  }
+];
+---
+
+<section id="paquetes" class="w-full bg-[#111111] py-24 border-b border-[#2c2c2c]">
+  <div class="max-w-7xl mx-auto px-6 lg:px-12">
+    <!-- Header de Sección con Eyebrow, Título y Botón Píldora EXPLORAR -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <div>
+        <span class="text-xs font-mono font-medium tracking-[0.25em] text-[#8E8E8E] uppercase block mb-2">
+          ¿TU SIGUIENTE PAQUETE?
+        </span>
+        <h2 class="font-heading text-4xl sm:text-5xl md:text-6xl text-[#EDE4BE] tracking-wide uppercase leading-[0.95] max-w-2xl">
+          CADA SOBRE GUARDA UNA CARTA <span class="text-[#6E6E6E]">PARA TI.</span>
+        </h2>
+      </div>
+
+      <!-- Botón Píldora Crema EXPLORAR -->
+      <a
+        href="#cards"
+        class="inline-flex items-center justify-center self-start md:self-auto px-7 py-2.5 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white transition-all shadow-md"
+      >
+        EXPLORAR
+      </a>
+    </div>
+
+    <!-- Grid Horizontal de 4 Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {packsData.map((pack) => (
+        <PackCard
+          id={pack.id}
+          title={pack.title}
+          subtitle={pack.subtitle}
+          priceMxn={pack.priceMxn}
+          imageUrl={pack.imageUrl}
+        />
+      ))}
+    </div>
+  </div>
+</section>

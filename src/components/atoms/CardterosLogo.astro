@@ -1,0 +1,81 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { size = 'md', class: className = '' } = Astro.props;
+
+const heightClass = {
+  sm: 'h-6 sm:h-7',
+  md: 'h-8 sm:h-9',
+  lg: 'h-10 sm:h-12'
+}[size];
+---
+
+<div class={`inline-flex items-center select-none ${className}`} aria-label="Cardteros">
+  <svg
+    class={`${heightClass} w-auto`}
+    viewBox="0 0 280 64"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <!-- Filtro de sombra y relieve para estética retro varsity / béisbol -->
+    <defs>
+      <filter id="cardteros-glow" x="-10%" y="-10%" width="120%" height="120%">
+        <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.8" />
+      </filter>
+    </defs>
+
+    <!-- Texto Béisbol / Script Vintage con Borde Crema y Relleno Rojo -->
+    <g filter="url(#cardteros-glow)">
+      <!-- Contorno Crema (#EDE4BE) exterior -->
+      <text
+        x="10"
+        y="46"
+        font-family="'Brush Script MT', 'Pacifico', 'Lobster', 'Caveat', cursive, sans-serif"
+        font-size="48"
+        font-weight="900"
+        font-style="italic"
+        letter-spacing="0.5px"
+        fill="#EDE4BE"
+        stroke="#EDE4BE"
+        stroke-width="8"
+        stroke-linejoin="round"
+      >
+        Cardteros
+      </text>
+
+      <!-- Relleno Rojo Deportivo (#A72027) -->
+      <text
+        x="10"
+        y="46"
+        font-family="'Brush Script MT', 'Pacifico', 'Lobster', 'Caveat', cursive, sans-serif"
+        font-size="48"
+        font-weight="900"
+        font-style="italic"
+        letter-spacing="0.5px"
+        fill="#A72027"
+      >
+        Cardteros
+      </text>
+
+      <!-- Destello interior sutil -->
+      <text
+        x="10"
+        y="45"
+        font-family="'Brush Script MT', 'Pacifico', 'Lobster', 'Caveat', cursive, sans-serif"
+        font-size="48"
+        font-weight="900"
+        font-style="italic"
+        letter-spacing="0.5px"
+        fill="none"
+        stroke="#FF4D57"
+        stroke-width="1.5"
+        stroke-dasharray="8 12"
+      >
+        Cardteros
+      </text>
+    </g>
+  </svg>
+</div>

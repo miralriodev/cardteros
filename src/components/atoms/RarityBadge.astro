@@ -1,0 +1,46 @@
+---
+interface Props {
+  type: 'superfractor' | 'serial' | 'rc' | 'auto' | 'patch';
+  text?: string;
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  type,
+  text,
+  size = 'sm',
+  class: className = ''
+} = Astro.props;
+
+const config = {
+  superfractor: {
+    bg: 'bg-gradient-to-r from-[#FFB800] via-[#FFE580] to-[#FF9900] text-[#08090C] font-black shadow-[0_0_12px_rgba(255,184,0,0.4)]',
+    defaultText: '1/1 ONE OF ONE'
+  },
+  serial: {
+    bg: 'bg-[#181D26] text-[#00E5FF] border border-[#00E5FF]/40 font-mono font-bold',
+    defaultText: text || 'NUMBERED'
+  },
+  rc: {
+    bg: 'bg-gradient-to-r from-[#00E5FF] to-[#0099FF] text-[#08090C] font-black tracking-wider',
+    defaultText: 'ROOKIE CARD (RC)'
+  },
+  auto: {
+    bg: 'bg-[#9D00FF]/20 text-[#D880FF] border border-[#9D00FF]/50 font-bold',
+    defaultText: 'ON-CARD AUTO'
+  },
+  patch: {
+    bg: 'bg-[#00F5A0]/20 text-[#00F5A0] border border-[#00F5A0]/50 font-bold',
+    defaultText: 'GAME-WORN PATCH'
+  }
+};
+
+const current = config[type];
+const displayText = text || current.defaultText;
+const sizeClass = size === 'sm' ? 'text-[10px] px-2 py-0.5' : 'text-xs px-2.5 py-1';
+---
+
+<span class={`inline-flex items-center gap-1 rounded-sm uppercase tracking-wide select-none ${current.bg} ${sizeClass} ${className}`}>
+  {displayText}
+</span>

@@ -1,0 +1,77 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<section class={`relative w-full overflow-hidden bg-[#111111] pt-14 pb-28 md:pt-20 md:pb-36 border-b border-[#2c2c2c] ${className}`}>
+  <!-- Destello / Spotlight Ambiental Central (Figma Vibe) -->
+  <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+    <div class="w-[600px] h-[600px] bg-[#EDE4BE]/5 rounded-full blur-[160px] -translate-y-20"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[450px] h-[450px] bg-[#A72027]/10 rounded-full blur-[140px]"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
+    <!-- Título Masivo en Bebas Neue (Figma Exact Match) -->
+    <h1 class="font-heading text-7xl sm:text-8xl md:text-9xl lg:text-[150px] tracking-wide text-[#EDE4BE] uppercase leading-[0.85] select-none mb-3 drop-shadow-sm">
+      YA LLEGAMOS
+    </h1>
+
+    <!-- Subtítulo con Puntos de Separación -->
+    <p class="text-xs sm:text-sm md:text-base font-mono font-medium tracking-[0.35em] text-[#C4C4C4] uppercase mb-12 sm:mb-16 select-none">
+      BREAKS • CAJAS • SLAPS
+    </p>
+
+    <!-- Showcase Visual de Cartas en Abanico 3D -->
+    <div class="relative w-full max-w-4xl mx-auto flex items-center justify-center pt-2 pb-6 perspective-hero">
+      <div class="relative flex items-center justify-center w-full min-h-[360px] sm:min-h-[460px] md:min-h-[520px]">
+        
+        <!-- 1. Carta Izquierda: Jugador Lakers (Inclinada -14deg) -->
+        <div class="absolute -left-2 sm:left-6 md:left-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-left cursor-pointer group">
+          <div class="relative rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 sm:p-2 group-hover:border-[#EDE4BE] transition-colors shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
+              <img
+                src="/images/cards/lakers-lebron-psa10.jpg"
+                alt="Carta coleccionable Los Angeles Lakers PSA 10"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Carta Central: Erling Haaland (Frente, Elevada y Destacada) -->
+        <div class="relative w-[205px] sm:w-[275px] md:w-[325px] hero-fan-center cursor-pointer group">
+          <div class="relative rounded-2xl bg-[#0a0a0a] border-2 border-[#EDE4BE] p-2 sm:p-2.5 shadow-[0_30px_70px_rgba(0,0,0,0.95)] group-hover:border-white transition-all">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
+              <img
+                src="/images/cards/haaland-psa10.jpg"
+                alt="Carta coleccionable Erling Haaland Goal King Chrome Refractor PSA 10"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Carta Derecha: Buffalo Bills (Inclinada +14deg) -->
+        <div class="absolute -right-2 sm:right-6 md:right-14 top-6 sm:top-10 w-[170px] sm:w-[230px] md:w-[275px] hero-fan-right cursor-pointer group">
+          <div class="relative rounded-2xl bg-[#0a0a0a] border border-[#444444] p-1.5 sm:p-2 group-hover:border-[#EDE4BE] transition-colors shadow-2xl">
+            <div class="overflow-hidden rounded-xl bg-black aspect-[3/4]">
+              <img
+                src="/images/cards/bills-josh-allen-psa10.jpg"
+                alt="Carta coleccionable Buffalo Bills Josh Allen Prizm PSA 10"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="eager"
+              />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

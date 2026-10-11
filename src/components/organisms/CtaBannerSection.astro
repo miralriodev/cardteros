@@ -1,0 +1,20 @@
+---
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<section class={`w-full bg-[#111111] py-28 md:py-36 border-b border-[#2c2c2c] text-center relative overflow-hidden ${className}`}>
+  <!-- Destello sutil ambiental -->
+  <div class="absolute inset-0 pointer-events-none flex items-center justify-center">
+    <div class="w-[500px] h-[300px] bg-[#EDE4BE]/5 rounded-full blur-[140px]"></div>
+  </div>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center">
+    <h2 class="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-[130px] text-[#EDE4BE] tracking-tight uppercase leading-[0.88] select-none">
+      TU SIGUIENTE<br />SOBRE TE ESPERA
+    </h2>
+  </div>
+</section>
