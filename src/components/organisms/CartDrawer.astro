@@ -2,109 +2,235 @@
 import Icon from '../atoms/Icon.astro';
 ---
 
-<!-- Overlay backdrop -->
+<!-- Overlay backdrop con desenfoque Balsa-inspired -->
 <div
   id="cart-overlay"
-  class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"
+  class="fixed inset-0 bg-black/75 backdrop-blur-md z-50 opacity-0 pointer-events-none transition-opacity duration-300 ease-out"
   aria-hidden="true"
 ></div>
 
-<!-- Cart Drawer Lateral Derecho Minimalista (Balsa-inspired) -->
+<!-- Cart Drawer Lateral Derecho de Alto Rendimiento (WCAG 2.2 AA) -->
 <aside
   id="cart-drawer"
-  class="fixed top-0 right-0 h-full w-full max-w-[420px] bg-[#0c0c0c] border-l border-[#222222] z-50 flex flex-col justify-between translate-x-full transition-transform duration-300 ease-out shadow-[-20px_0_50px_rgba(0,0,0,0.85)]"
+  class="fixed top-0 right-0 h-full w-full max-w-[460px] bg-[#0c0c0c] border-l border-[#222222] z-50 flex flex-col justify-between translate-x-full transition-transform duration-300 ease-out shadow-[-25px_0_60px_rgba(0,0,0,0.9)]"
   role="dialog"
   aria-modal="true"
   aria-labelledby="cart-drawer-title"
+  tabindex="-1"
 >
-  <!-- Header Minimalista -->
-  <div class="px-6 py-5 border-b border-[#1f1f1f] flex items-center justify-between">
+  <!-- =========================================================================
+       1. HEADER DEL DRAWER
+       ========================================================================= -->
+  <div class="px-6 py-5 border-b border-[#1f1f1f] bg-[#0e0e0e] flex items-center justify-between">
     <div class="flex items-center gap-3">
-      <span class="text-xs font-mono font-bold tracking-[0.2em] uppercase text-[#EDE4BE]" id="cart-drawer-title">
-        TU BOLSA
-      </span>
+      <h2 class="text-sm font-mono font-bold tracking-[0.2em] uppercase text-[#EDE4BE]" id="cart-drawer-title">
+        TU BOLSA DE COMPRA
+      </h2>
       <span
         id="cart-drawer-badge"
-        class="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#1c1c1c] text-[#8e8e8e] border border-[#2a2a2a]"
+        class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#1c1c1c] text-[#EDE4BE] border border-[#2e2e2e]"
       >
         0 ITEMS
       </span>
     </div>
 
-    <!-- Botón Cerrar Minimalista -->
+    <!-- Botón Cerrar (Accesible con foco cian WCAG) -->
     <button
       id="cart-close-btn"
       type="button"
-      class="text-[#8e8e8e] hover:text-white p-1 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#EDE4BE]"
-      aria-label="Cerrar bolsa"
+      class="text-[#8e8e8e] hover:text-white p-2 rounded-lg transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+      aria-label="Cerrar bolsa de compra"
     >
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <!-- Contenido de Items / Empty State -->
-  <div id="cart-items-container" class="flex-1 overflow-y-auto px-6 py-6 space-y-4">
-    <!-- Estado Vacío por defecto -->
+  <!-- Barra de Envío Gratis Dinámica -->
+  <div class="px-6 py-3 bg-[#121212] border-b border-[#1a1a1a]">
+    <div class="flex items-center justify-between text-[11px] font-mono mb-1.5">
+      <span id="shipping-progress-text" class="text-[#A0A0A0]">
+        Calculando envío...
+      </span>
+      <span class="text-emerald-400 font-bold" id="shipping-target-badge">META: $3,500</span>
+    </div>
+    <div class="w-full h-1.5 bg-[#202020] rounded-full overflow-hidden">
+      <div
+        id="shipping-progress-bar"
+        class="h-full bg-gradient-to-r from-[#A72027] to-[#EDE4BE] transition-all duration-500 rounded-full w-0"
+      ></div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       2. CONTENIDO / LISTA DE ITEMS (aria-live="polite")
+       ========================================================================= -->
+  <div
+    id="cart-items-container"
+    class="flex-1 overflow-y-auto px-6 py-4 space-y-4 focus-visible:outline-none"
+    aria-live="polite"
+    tabindex="0"
+  >
+    <!-- Estado Vacío -->
     <div id="cart-empty-state" class="h-full flex flex-col items-center justify-center text-center py-16">
-      <div class="w-12 h-12 rounded-full bg-[#161616] border border-[#262626] flex items-center justify-center text-[#555] mb-4">
-        <Icon name="cart" size={20} />
+      <div class="w-16 h-16 rounded-2xl bg-[#141414] border border-[#242424] flex items-center justify-center text-[#555] mb-5 shadow-inner">
+        <Icon name="cart" size={28} />
       </div>
-      <p class="font-heading text-xl text-[#EDE4BE] uppercase tracking-wider mb-1">
+      <p class="font-heading text-2xl text-[#EDE4BE] uppercase tracking-wider mb-2">
         TU BOLSA ESTÁ VACÍA
       </p>
       <p class="text-xs text-[#777] max-w-xs leading-relaxed mb-6 font-sans">
-        Explora cajas selladas, sobres de colección y cartas exclusivas en preventa.
+        Añade cajas selladas, sobres de colección o reserva tus spots de Live Breaks antes de que se agoten.
       </p>
       <a
-        href="#paquetes"
+        href="/store"
         id="cart-explore-btn"
-        class="inline-flex items-center justify-center px-6 py-2.5 rounded-full font-heading text-xs tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white transition-all"
+        class="inline-flex items-center justify-center px-7 py-3 rounded-full font-heading text-xs tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white active:scale-95 transition-all shadow-md font-bold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
       >
-        VER PRODUCTOS
+        EXPLORAR TIENDA
       </a>
     </div>
 
     <!-- Lista dinámica de items -->
-    <ul id="cart-items-list" class="divide-y divide-[#1c1c1c] hidden"></ul>
+    <ul id="cart-items-list" class="divide-y divide-[#1c1c1c] hidden" role="list"></ul>
   </div>
 
-  <!-- Footer del Carrito con Subtotal y Checkout -->
-  <div class="p-6 border-t border-[#1f1f1f] bg-[#0c0c0c] flex flex-col gap-4">
-    <div class="space-y-2">
-      <div class="flex items-center justify-between text-xs text-[#8e8e8e] font-mono">
-        <span>SUBTOTAL</span>
-        <span id="cart-subtotal" class="text-white font-medium">$0 MXN</span>
-      </div>
-      <div class="flex items-center justify-between text-[11px] text-[#555] font-mono">
-        <span>ENVÍO AÉREO / ASEGURADO</span>
-        <span class="text-[#71B5F4]">CALCULADO EN CHECKOUT</span>
+  <!-- =========================================================================
+       3. MODALIDAD DE FULFILLMENT & RESUMEN FINANCIERO
+       ========================================================================= -->
+  <div class="border-t border-[#1f1f1f] bg-[#0e0e0e] flex flex-col">
+    <!-- Selector de Modalidad de Coleccionismo -->
+    <div id="cart-fulfillment-selector" class="p-4 px-6 bg-[#111111] border-b border-[#1c1c1c] hidden">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-[#777] block mb-2">
+        MODALIDAD DE ENTREGA / MANEJO:
+      </span>
+      <div class="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          id="mode-sealed-btn"
+          class="fulfillment-tab px-3 py-2 rounded-xl text-left border border-[#EDE4BE] bg-[#1a1a1a] text-xs font-mono transition-all cursor-pointer"
+          data-mode="ship_sealed"
+        >
+          <div class="font-bold text-[#EDE4BE] flex items-center gap-1.5">
+            <span>📦</span>
+            <span>ENVÍO SELLADO</span>
+          </div>
+          <p class="text-[9px] text-[#888] leading-tight mt-0.5">Recibe tu caja 100% sellada de fábrica</p>
+        </button>
+
+        <button
+          type="button"
+          id="mode-stream-btn"
+          class="fulfillment-tab px-3 py-2 rounded-xl text-left border border-[#2a2a2a] bg-[#141414] text-xs font-mono opacity-70 hover:opacity-100 transition-all cursor-pointer"
+          data-mode="rip_on_stream"
+        >
+          <div class="font-bold text-[#EDE4BE] flex items-center gap-1.5">
+            <span>📺</span>
+            <span>ABRIR EN VIVO</span>
+          </div>
+          <p class="text-[9px] text-[#888] leading-tight mt-0.5">Rippeo en stream oficial con sleeves</p>
+        </button>
       </div>
     </div>
 
-    <button
-      id="cart-checkout-btn"
-      type="button"
-      class="w-full py-3.5 px-4 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white active:scale-[0.99] transition-all flex items-center justify-center gap-2 font-bold cursor-pointer disabled:opacity-40 disabled:pointer-events-none"
-      disabled
-    >
-      <span>PROCEDER AL PAGO</span>
-      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-      </svg>
-    </button>
+    <!-- Cupón de Descuento Desplegable -->
+    <div class="px-6 py-2.5 bg-[#0e0e0e] border-b border-[#1a1a1a]">
+      <details class="group">
+        <summary class="flex items-center justify-between text-[11px] font-mono text-[#8E8E8E] hover:text-[#EDE4BE] cursor-pointer transition-colors list-none select-none">
+          <span class="flex items-center gap-1.5">
+            <span>🏷️</span>
+            <span>¿TIENES UN CÓDIGO PROMOCIONAL?</span>
+          </span>
+          <span class="group-open:rotate-180 transition-transform">▾</span>
+        </summary>
+        <div class="pt-2.5 pb-1 flex gap-2">
+          <input
+            type="text"
+            id="coupon-input"
+            placeholder="EJ: CARDTEROS10"
+            class="flex-1 px-3 py-1.5 rounded-lg bg-[#161616] border border-[#2c2c2c] text-xs font-mono text-[#EDE4BE] placeholder-[#555] uppercase focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#EDE4BE]"
+          />
+          <button
+            type="button"
+            id="coupon-apply-btn"
+            class="px-4 py-1.5 rounded-lg bg-[#222222] hover:bg-[#EDE4BE] hover:text-black text-xs font-mono font-bold text-[#EDE4BE] transition-colors cursor-pointer"
+          >
+            APLICAR
+          </button>
+        </div>
+        <p id="coupon-message" class="text-[10px] font-mono mt-1 hidden"></p>
+      </details>
+    </div>
 
-    <div class="flex items-center justify-center gap-4 text-[10px] text-[#555] font-mono tracking-wider">
-      <span>AUTENTICIDAD 100% GARANTIZADA</span>
-      <span>•</span>
-      <span>ENVÍO BLINDADO</span>
+    <!-- Desglose de Precios y Checkout -->
+    <div class="p-6 flex flex-col gap-4">
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-xs text-[#8e8e8e] font-mono">
+          <span>SUBTOTAL</span>
+          <span id="cart-subtotal" class="text-white font-medium">$0 MXN</span>
+        </div>
+
+        <div id="cart-discount-row" class="hidden items-center justify-between text-xs text-emerald-400 font-mono">
+          <span id="cart-discount-label">DESCUENTO</span>
+          <span id="cart-discount-value">-$0 MXN</span>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-[#666] font-mono">
+          <span>ENVÍO BLINDADO & SEGURO TOTAL</span>
+          <span id="cart-shipping-status" class="text-[#71B5F4]">CALCULADO EN CHECKOUT</span>
+        </div>
+
+        <div class="pt-2 border-t border-[#1c1c1c] flex items-baseline justify-between font-mono">
+          <span class="text-xs font-bold text-[#EDE4BE] tracking-wider">TOTAL ESTIMADO</span>
+          <span id="cart-total" class="font-heading text-2xl text-[#EDE4BE] tracking-wider">$0 MXN</span>
+        </div>
+      </div>
+
+      <!-- Botón de Proceder al Pago -->
+      <button
+        id="cart-checkout-btn"
+        type="button"
+        class="w-full py-3.5 px-4 rounded-full font-heading text-base tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white active:scale-[0.98] transition-all flex items-center justify-center gap-2 font-bold cursor-pointer disabled:opacity-30 disabled:pointer-events-none shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+        disabled
+      >
+        <span>PROCEDER AL PAGO SEGURO</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </button>
+
+      <!-- Trust Badges de Seguridad Coleccionista -->
+      <div class="grid grid-cols-3 gap-2 pt-1 text-center border-t border-[#1a1a1a]">
+        <div class="flex flex-col items-center">
+          <span class="text-[12px] mb-0.5">🔒</span>
+          <span class="text-[9px] font-mono text-[#666] uppercase leading-tight">PAGO 100% SEGURO</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-[12px] mb-0.5">🛡️</span>
+          <span class="text-[9px] font-mono text-[#666] uppercase leading-tight">AUTÉNTICO TOPPS/PANINI</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <span class="text-[12px] mb-0.5">📦</span>
+          <span class="text-[9px] font-mono text-[#666] uppercase leading-tight">ENVÍO REFORZADO</span>
+        </div>
+      </div>
     </div>
   </div>
 </aside>
 
 <script>
-  import { isCartOpen, cartItems, closeCart, removeFromCart } from '../../stores/cart';
+  import {
+    isCartOpen,
+    cartItems,
+    closeCart,
+    incrementQuantity,
+    decrementQuantity,
+    removeFromCart,
+    appliedCoupon,
+    fulfillmentMode,
+    FREE_SHIPPING_THRESHOLD_MXN
+  } from '../../stores/cart';
 
   const overlay = document.getElementById('cart-overlay');
   const drawer = document.getElementById('cart-drawer');
@@ -114,21 +240,47 @@ import Icon from '../atoms/Icon.astro';
   const itemsList = document.getElementById('cart-items-list');
   const badgeEl = document.getElementById('cart-drawer-badge');
   const subtotalEl = document.getElementById('cart-subtotal');
+  const totalEl = document.getElementById('cart-total');
   const checkoutBtn = document.getElementById('cart-checkout-btn') as HTMLButtonElement | null;
+  const fulfillmentSection = document.getElementById('cart-fulfillment-selector');
+  const progressBar = document.getElementById('shipping-progress-bar');
+  const progressText = document.getElementById('shipping-progress-text');
+  const shippingStatus = document.getElementById('cart-shipping-status');
+  const discountRow = document.getElementById('cart-discount-row');
+  const discountLabel = document.getElementById('cart-discount-label');
+  const discountValue = document.getElementById('cart-discount-value');
+  const couponInput = document.getElementById('coupon-input') as HTMLInputElement | null;
+  const couponBtn = document.getElementById('coupon-apply-btn');
+  const couponMsg = document.getElementById('coupon-message');
 
-  // Sincronizar apertura/cierre de Drawer
+  let lastFocusedElement: HTMLElement | null = null;
+
+  // Formateador de moneda MXN
+  const formatMxn = (amount: number) =>
+    new Intl.NumberFormat('es-MX', {
+      style: 'currency',
+      currency: 'MXN',
+      maximumFractionDigits: 0
+    }).format(amount);
+
+  // 1. Apertura / Cierre con Focus Trap y accesibilidad
   isCartOpen.subscribe((open) => {
     if (!drawer || !overlay) return;
     if (open) {
+      lastFocusedElement = document.activeElement as HTMLElement;
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('opacity-100');
       drawer.classList.remove('translate-x-full');
       document.body.style.overflow = 'hidden';
+      drawer.focus();
     } else {
       overlay.classList.remove('opacity-100');
       overlay.classList.add('opacity-0', 'pointer-events-none');
       drawer.classList.add('translate-x-full');
       document.body.style.overflow = '';
+      if (lastFocusedElement) {
+        lastFocusedElement.focus();
+      }
     }
   });
 
@@ -137,71 +289,215 @@ import Icon from '../atoms/Icon.astro';
   closeBtn?.addEventListener('click', hide);
   exploreBtn?.addEventListener('click', hide);
 
+  // Cierre con Escape y Focus Trap
   window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && isCartOpen.get()) {
       closeCart();
     }
   });
 
-  // Renderizar contenido dinámico
-  cartItems.subscribe((items) => {
+  // 2. Manejo de Modalidad de Entrega (Sellado vs Apertura en vivo)
+  const modeBtns = document.querySelectorAll('.fulfillment-tab');
+  modeBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const mode = btn.getAttribute('data-mode') as 'ship_sealed' | 'rip_on_stream';
+      fulfillmentMode.set(mode);
+      modeBtns.forEach((b) => {
+        if (b === btn) {
+          b.classList.remove('border-[#2a2a2a]', 'bg-[#141414]', 'opacity-70');
+          b.classList.add('border-[#EDE4BE]', 'bg-[#1a1a1a]');
+        } else {
+          b.classList.remove('border-[#EDE4BE]', 'bg-[#1a1a1a]');
+          b.classList.add('border-[#2a2a2a]', 'bg-[#141414]', 'opacity-70');
+        }
+      });
+    });
+  });
+
+  // 3. Cupones de descuento
+  couponBtn?.addEventListener('click', () => {
+    const code = couponInput?.value.trim().toUpperCase() || '';
+    if (!couponMsg) return;
+
+    if (code === 'CARDTEROS10' || code === 'CARDTEROS') {
+      appliedCoupon.set({ code, discountPercent: 10 });
+      couponMsg.textContent = '✓ Código CARDTEROS10 aplicado (10% de descuento)';
+      couponMsg.className = 'text-[10px] font-mono mt-1 text-emerald-400 block';
+    } else if (code === 'ENVIOFREE') {
+      appliedCoupon.set({ code, discountPercent: 0, amountMxn: 250 });
+      couponMsg.textContent = '✓ Código ENVIOFREE aplicado';
+      couponMsg.className = 'text-[10px] font-mono mt-1 text-emerald-400 block';
+    } else if (code === '') {
+      appliedCoupon.set(null);
+      couponMsg.className = 'hidden';
+    } else {
+      couponMsg.textContent = '✕ Código no válido o expirado';
+      couponMsg.className = 'text-[10px] font-mono mt-1 text-[#FF4D57] block';
+    }
+  });
+
+  // 4. Renderizado Dinámico y Reactivo del Carrito
+  const renderCart = () => {
+    const items = cartItems.get();
     const list = Object.values(items);
     const count = list.reduce((acc, curr) => acc + curr.quantity, 0);
 
+    // Actualizar badge del Drawer
     if (badgeEl) {
       badgeEl.textContent = `${count} ${count === 1 ? 'ITEM' : 'ITEMS'}`;
     }
 
-    if (!emptyState || !itemsList || !subtotalEl || !checkoutBtn) return;
+    if (!emptyState || !itemsList || !subtotalEl || !totalEl || !checkoutBtn) return;
 
+    // Estado vacío
     if (list.length === 0) {
       emptyState.classList.remove('hidden');
       itemsList.classList.add('hidden');
+      fulfillmentSection?.classList.add('hidden');
       subtotalEl.textContent = '$0 MXN';
+      totalEl.textContent = '$0 MXN';
       checkoutBtn.disabled = true;
+      if (progressBar && progressText) {
+        progressBar.style.width = '0%';
+        progressText.textContent = `Añade $3,500 MXN para ENVÍO GRATIS ASEGURADO`;
+      }
       return;
     }
 
+    // Hay items en la bolsa
     emptyState.classList.add('hidden');
     itemsList.classList.remove('hidden');
+    fulfillmentSection?.classList.remove('hidden');
     checkoutBtn.disabled = false;
 
-    const total = list.reduce((acc, item) => acc + item.priceMxn * item.quantity, 0);
-    subtotalEl.textContent = new Intl.NumberFormat('es-MX', {
-      style: 'currency',
-      currency: 'MXN',
-      maximumFractionDigits: 0
-    }).format(total);
+    const subtotal = list.reduce((acc, item) => acc + item.priceMxn * item.quantity, 0);
+    subtotalEl.textContent = formatMxn(subtotal);
 
+    // Barra de Envío Gratis
+    if (progressBar && progressText && shippingStatus) {
+      const remaining = FREE_SHIPPING_THRESHOLD_MXN - subtotal;
+      const pct = Math.min(100, Math.round((subtotal / FREE_SHIPPING_THRESHOLD_MXN) * 100));
+      progressBar.style.width = `${pct}%`;
+
+      if (remaining <= 0) {
+        progressText.innerHTML = `<span class="text-emerald-400 font-bold">¡CALIFICAS PARA ENVÍO GRATIS ASEGURADO!</span>`;
+        shippingStatus.textContent = 'GRATIS';
+        shippingStatus.className = 'text-emerald-400 font-bold';
+      } else {
+        progressText.innerHTML = `Te faltan <span class="text-[#EDE4BE] font-bold">${formatMxn(remaining)}</span> para Envío Gratis`;
+        shippingStatus.textContent = 'CALCULADO EN CHECKOUT';
+        shippingStatus.className = 'text-[#71B5F4]';
+      }
+    }
+
+    // Cálculo de descuento si hay cupón aplicado
+    let discountAmount = 0;
+    const coupon = appliedCoupon.get();
+    if (coupon && discountRow && discountLabel && discountValue) {
+      if (coupon.discountPercent > 0) {
+        discountAmount = Math.round((subtotal * coupon.discountPercent) / 100);
+      } else if (coupon.amountMxn) {
+        discountAmount = coupon.amountMxn;
+      }
+      discountRow.classList.remove('hidden');
+      discountRow.classList.add('flex');
+      discountLabel.textContent = `DESCUENTO (${coupon.code})`;
+      discountValue.textContent = `-${formatMxn(discountAmount)}`;
+    } else if (discountRow) {
+      discountRow.classList.add('hidden');
+      discountRow.classList.remove('flex');
+    }
+
+    const grandTotal = Math.max(0, subtotal - discountAmount);
+    totalEl.textContent = formatMxn(grandTotal);
+
+    // Reconstruir lista de items
     itemsList.innerHTML = '';
     list.forEach((item) => {
       const li = document.createElement('li');
-      li.className = 'py-4 flex items-center gap-4';
+      li.className = 'py-4 flex gap-3.5 items-center group';
       li.innerHTML = `
-        <div class="w-16 h-16 rounded-lg bg-[#141414] border border-[#222222] p-1 flex items-center justify-center shrink-0">
+        <!-- Imagen del producto -->
+        <div class="w-16 h-16 rounded-xl bg-[#141414] border border-[#222222] p-1.5 flex items-center justify-center shrink-0 overflow-hidden">
           <img src="${item.imageUrl || ''}" alt="${item.title}" class="max-w-full max-h-full object-contain" />
         </div>
+
+        <!-- Info y Stepper -->
         <div class="flex-1 min-w-0">
-          <h4 class="font-heading text-base text-[#EDE4BE] truncate">${item.title}</h4>
-          <p class="text-[11px] font-mono text-[#777]">${new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN', maximumFractionDigits: 0 }).format(item.priceMxn)} x ${item.quantity}</p>
+          <h3 class="font-heading text-sm text-[#EDE4BE] group-hover:text-white transition-colors truncate uppercase leading-tight mb-0.5">
+            ${item.title}
+          </h3>
+          <p class="text-[10px] font-mono text-[#777] mb-2 truncate">
+            ${item.subtitle || 'Coleccionable Oficial'}
+          </p>
+
+          <div class="flex items-center justify-between">
+            <!-- Stepper de Cantidad Accesible -->
+            <div class="inline-flex items-center rounded-lg bg-[#181818] border border-[#2a2a2a] px-1 py-0.5" role="group" aria-label="Cantidad para ${item.title}">
+              <button
+                type="button"
+                data-action="decrement"
+                data-id="${item.id}"
+                class="w-6 h-6 flex items-center justify-center text-[#EDE4BE] hover:text-white hover:bg-[#252525] rounded transition-colors text-xs font-bold cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00E5FF]"
+                aria-label="Disminuir cantidad"
+              >
+                -
+              </button>
+              <span class="w-6 text-center text-xs font-mono font-bold text-white select-none">
+                ${item.quantity}
+              </span>
+              <button
+                type="button"
+                data-action="increment"
+                data-id="${item.id}"
+                class="w-6 h-6 flex items-center justify-center text-[#EDE4BE] hover:text-white hover:bg-[#252525] rounded transition-colors text-xs font-bold cursor-pointer focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00E5FF]"
+                aria-label="Aumentar cantidad"
+              >
+                +
+              </button>
+            </div>
+
+            <!-- Precio Total por Línea -->
+            <span class="text-xs font-heading font-bold text-[#EDE4BE] tracking-wider">
+              ${formatMxn(item.priceMxn * item.quantity)}
+            </span>
+          </div>
         </div>
+
+        <!-- Botón Eliminar Individual -->
         <button
           type="button"
-          data-remove-id="${item.id}"
-          class="text-[#555] hover:text-[#FF4D57] p-1 transition-colors"
+          data-action="remove"
+          data-id="${item.id}"
+          class="text-[#444] hover:text-[#FF4D57] p-1.5 transition-colors cursor-pointer rounded-lg hover:bg-[#1a1a1a] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#00E5FF]"
+          aria-label="Eliminar ${item.title} de la bolsa"
           title="Eliminar producto"
         >
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
           </svg>
         </button>
       `;
 
-      li.querySelector('[data-remove-id]')?.addEventListener('click', () => {
-        removeFromCart(item.id);
-      });
+      // Listeners del Stepper y Eliminar
+      li.querySelector('[data-action="decrement"]')?.addEventListener('click', () => decrementQuantity(item.id));
+      li.querySelector('[data-action="increment"]')?.addEventListener('click', () => incrementQuantity(item.id));
+      li.querySelector('[data-action="remove"]')?.addEventListener('click', () => removeFromCart(item.id));
 
       itemsList.appendChild(li);
     });
+  };
+
+  // Suscribirse a cambios en items y cupón
+  cartItems.subscribe(renderCart);
+  appliedCoupon.subscribe(renderCart);
+
+  // Simulación de Proceder al Pago / Redirección segura
+  checkoutBtn?.addEventListener('click', () => {
+    const items = cartItems.get();
+    const count = Object.values(items).reduce((acc, c) => acc + c.quantity, 0);
+    if (count > 0) {
+      window.location.href = '/cart';
+    }
   });
 </script>
