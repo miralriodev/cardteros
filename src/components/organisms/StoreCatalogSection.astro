@@ -1,0 +1,363 @@
+---
+import StoreProductCard from '../molecules/StoreProductCard.astro';
+
+// Productos oficiales de la sección NFL de Figma (node 3958:483)
+const products = [
+  {
+    id: 'store-nfl-resurgence-2025',
+    title: 'RESURGENCE - 2025 NFL TRADING CARDS',
+    category: 'NFL',
+    priceMxn: 1000,
+    imageUrl: '/assets/pr1.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-resurgence-breaker',
+    title: '2025 TOPPS RESURGENCE BREAKER BOX',
+    category: 'NFL',
+    priceMxn: 1200,
+    imageUrl: '/assets/pr2.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-topps-value',
+    title: '2026 TOPPS VALUE BOX FOOTBALL',
+    category: 'NFL',
+    priceMxn: 450,
+    imageUrl: '/assets/pr3.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-resurgence-mega',
+    title: '2025 TOPPS RESURGENCE MEGA BOX',
+    category: 'NFL',
+    priceMxn: 800,
+    imageUrl: '/assets/pr4.png',
+    isAvailable: false
+  },
+  {
+    id: 'store-nfl-josh-allen-slab',
+    title: 'JOSH ALLEN - PRIZM DOWNTOWN SSP SLAB',
+    category: 'NFL',
+    priceMxn: 3500,
+    imageUrl: '/assets/joshallenhero.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-tyler-shough-auto',
+    title: 'TYLER SHOUGH - ROOKIE AUTO REFRACTOR SLAB',
+    category: 'NFL',
+    priceMxn: 2400,
+    imageUrl: '/assets/tylersough_slab.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-resurgence-hobby-case',
+    title: '2025 RESURGENCE SEALED HOBBY CASE (8 BOXES)',
+    category: 'NFL',
+    priceMxn: 7800,
+    imageUrl: '/assets/pr1.png',
+    isAvailable: true
+  },
+  {
+    id: 'store-nfl-resurgence-silver-pack',
+    title: 'RESURGENCE SILVER PACK EXCLUSIVE',
+    category: 'NFL',
+    priceMxn: 650,
+    imageUrl: '/assets/pr2.png',
+    isAvailable: true
+  }
+];
+---
+
+<section class="w-full bg-[#111111] min-h-screen py-10 sm:py-16">
+  <div class="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
+    
+    <!-- Breadcrumbs de Navegación -->
+    <nav class="flex items-center gap-2 text-xs font-mono tracking-wider text-[#777777] mb-6 uppercase" aria-label="Ruta de navegación">
+      <a href="/" class="hover:text-[#EDE4BE] transition-colors">INICIO</a>
+      <span>/</span>
+      <span class="text-[#A0A0A0]">TIENDA</span>
+      <span>/</span>
+      <span class="text-[#EDE4BE]">NFL</span>
+    </nav>
+
+    <!-- Título Principal de Sección Figma: "NFL" Gigante -->
+    <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 sm:mb-12">
+      <div>
+        <h1 class="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-[#EDE4BE] tracking-tight uppercase leading-[0.88]">
+          NFL
+        </h1>
+        <p class="text-xs sm:text-sm font-mono text-[#8E8E8E] tracking-widest uppercase mt-3">
+          CAJAS SELLADAS, SOBRES EXCLUSIVOS Y TARJETAS GRADUADAS DE ÉLITE
+        </p>
+      </div>
+
+      <!-- Badge de Bóveda Cardteros -->
+      <div class="flex items-center gap-3 px-4 py-2 rounded-full border border-[#222222] bg-[#141414] self-start md:self-auto">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-xs font-mono text-[#A0A0A0] uppercase tracking-wider">
+          AUTENTICIDAD 100% GARANTIZADA
+        </span>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         Barra de Controles de Figma (Node 3958:483):
+         [FILTRAR]  [SOLO DISPONIBLES]                        [ORDENAR POR v]
+         ========================================================================= -->
+    <div class="flex flex-wrap items-center justify-between gap-4 py-4 mb-8 sm:mb-10 border-y border-[#222222]">
+      <!-- Controles Izquierda (FILTRAR + SOLO DISPONIBLES) -->
+      <div class="flex items-center gap-4 sm:gap-6 flex-wrap">
+        <!-- Botón FILTRAR Píldora con Borde -->
+        <button
+          type="button"
+          id="store-filter-btn"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#333333] hover:border-[#EDE4BE] bg-[#161616] hover:bg-[#202020] text-[#EDE4BE] text-xs font-mono font-bold tracking-wider uppercase transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+          aria-label="Abrir panel de filtros"
+        >
+          <svg class="w-3.5 h-3.5 text-[#EDE4BE]" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"/>
+          </svg>
+          <span>FILTRAR</span>
+        </button>
+
+        <!-- Toggle SOLO DISPONIBLES -->
+        <label class="inline-flex items-center gap-2.5 cursor-pointer select-none text-xs font-mono font-medium tracking-wider text-[#A0A0A0] hover:text-white uppercase transition-colors">
+          <input type="checkbox" id="store-toggle-available" class="sr-only peer" checked />
+          <div class="relative w-8 h-4.5 bg-[#242424] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-3.5 peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-[#EDE4BE] peer-checked:after:bg-white after:rounded-full after:h-3.5 after:w-3.5 after:transition-all peer-checked:bg-[#A72027]"></div>
+          <span class="text-[11px] sm:text-xs">SOLO DISPONIBLES</span>
+        </label>
+      </div>
+
+      <!-- Controles Derecha (ORDENAR POR) - Píldora Crema Figma #EDE4BE -->
+      <div class="relative">
+        <button
+          type="button"
+          id="store-sort-btn"
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#EDE4BE] hover:bg-white text-black text-xs font-heading font-bold tracking-widest uppercase transition-all shadow-sm cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+          aria-expanded="false"
+          aria-haspopup="listbox"
+        >
+          <span id="store-sort-label">ORDENAR POR</span>
+          <svg class="w-3.5 h-3.5 text-black transition-transform duration-200" id="store-sort-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+
+        <!-- Menú Desplegable de Opciones de Ordenamiento -->
+        <div
+          id="store-sort-menu"
+          class="hidden absolute right-0 mt-2 w-52 rounded-2xl bg-[#161616] border border-[#2a2a2a] shadow-[0_20px_40px_rgba(0,0,0,0.9)] py-2 z-30"
+          role="listbox"
+        >
+          <button type="button" class="store-sort-option w-full text-left px-4 py-2.5 text-xs font-mono text-[#EDE4BE] hover:bg-[#222222] transition-colors" data-sort="price-asc">
+            Precio: Menor a Mayor
+          </button>
+          <button type="button" class="store-sort-option w-full text-left px-4 py-2.5 text-xs font-mono text-[#EDE4BE] hover:bg-[#222222] transition-colors" data-sort="price-desc">
+            Precio: Mayor a Menor
+          </button>
+          <button type="button" class="store-sort-option w-full text-left px-4 py-2.5 text-xs font-mono text-[#EDE4BE] hover:bg-[#222222] transition-colors" data-sort="name-asc">
+            Nombre: A - Z
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel / Drawer de Filtros Expandible -->
+    <div
+      id="store-filter-panel"
+      class="hidden mb-8 p-6 rounded-2xl bg-[#141414] border border-[#262626] transition-all"
+    >
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="font-heading text-xl text-[#EDE4BE] tracking-wide uppercase">FILTROS DEL CATÁLOGO</h3>
+        <button type="button" id="store-filter-close" class="text-xs font-mono text-[#8E8E8E] hover:text-white uppercase">CERRAR ✕</button>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-3 border-t border-[#222222]">
+        <!-- Rango de Precio -->
+        <div>
+          <span class="text-xs font-mono text-[#8E8E8E] uppercase tracking-wider block mb-2">PRECIO MÁXIMO</span>
+          <div class="flex items-center gap-3">
+            <input type="range" id="price-slider" min="400" max="8000" step="100" value="8000" class="w-full accent-[#EDE4BE]" />
+            <span id="price-slider-value" class="text-xs font-mono text-[#EDE4BE] min-w-16">$8,000</span>
+          </div>
+        </div>
+
+        <!-- Tipo de Producto -->
+        <div>
+          <span class="text-xs font-mono text-[#8E8E8E] uppercase tracking-wider block mb-2">FORMATO</span>
+          <div class="flex flex-wrap gap-2">
+            <button type="button" class="px-3 py-1 rounded-full text-xs font-mono bg-[#222222] text-[#EDE4BE] hover:bg-[#333333]">Todos</button>
+            <button type="button" class="px-3 py-1 rounded-full text-xs font-mono bg-[#181818] text-[#8E8E8E] hover:text-[#EDE4BE]">Hobby Box</button>
+            <button type="button" class="px-3 py-1 rounded-full text-xs font-mono bg-[#181818] text-[#8E8E8E] hover:text-[#EDE4BE]">Slabs</button>
+          </div>
+        </div>
+
+        <!-- Limpiar Filtros -->
+        <div class="flex items-end">
+          <button type="button" id="reset-filters" class="text-xs font-mono text-[#A72027] hover:text-white uppercase underline cursor-pointer">
+            Restablecer todos los filtros
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =========================================================================
+         Grid de Productos 4 Columnas Fiel a Figma (Node 3958:483)
+         ========================================================================= -->
+    <div
+      id="store-products-grid"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+    >
+      {products.map((p) => (
+        <StoreProductCard
+          id={p.id}
+          title={p.title}
+          category={p.category}
+          priceMxn={p.priceMxn}
+          imageUrl={p.imageUrl}
+          isAvailable={p.isAvailable}
+        />
+      ))}
+    </div>
+
+    <!-- Estado Vacío cuando ningún producto coincide con el filtro -->
+    <div
+      id="store-empty-state"
+      class="hidden py-24 text-center"
+    >
+      <p class="font-heading text-3xl text-[#EDE4BE] uppercase mb-2">NO SE ENCONTRARON PRODUCTOS</p>
+      <p class="text-xs font-mono text-[#8E8E8E]">Prueba modificando tus filtros o desactivando "Solo disponibles".</p>
+    </div>
+
+  </div>
+</section>
+
+<script>
+  import { addToCart } from '../../stores/cart';
+
+  // 1. Integración de Botones AGREGAR con el Carrito (Nanostores)
+  function attachCartButtons() {
+    document.querySelectorAll<HTMLButtonElement>('.add-to-cart-btn').forEach((btn) => {
+      btn.onclick = () => {
+        const id = btn.getAttribute('data-item-id');
+        const title = btn.getAttribute('data-item-title');
+        const price = Number(btn.getAttribute('data-item-price')) || 0;
+        const imageUrl = btn.getAttribute('data-item-image') || '';
+
+        if (id && title) {
+          addToCart({
+            id,
+            title,
+            subtitle: 'NFL Trading Cards',
+            priceMxn: price,
+            imageUrl,
+            quantity: 1,
+            type: 'box'
+          });
+        }
+      };
+    });
+  }
+  attachCartButtons();
+
+  // 2. Control del Menú Desplegable "ORDENAR POR"
+  const sortBtn = document.getElementById('store-sort-btn');
+  const sortMenu = document.getElementById('store-sort-menu');
+  const sortChevron = document.getElementById('store-sort-chevron');
+  const sortOptions = document.querySelectorAll('.store-sort-option');
+  const sortLabel = document.getElementById('store-sort-label');
+  const productsGrid = document.getElementById('store-products-grid');
+
+  let isSortOpen = false;
+  function toggleSort() {
+    isSortOpen = !isSortOpen;
+    if (sortMenu && sortChevron && sortBtn) {
+      if (isSortOpen) {
+        sortMenu.classList.remove('hidden');
+        sortChevron.classList.add('rotate-180');
+        sortBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        sortMenu.classList.add('hidden');
+        sortChevron.classList.remove('rotate-180');
+        sortBtn.setAttribute('aria-expanded', 'false');
+      }
+    }
+  }
+
+  sortBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleSort();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (isSortOpen && !sortMenu?.contains(e.target as Node) && !sortBtn?.contains(e.target as Node)) {
+      toggleSort();
+    }
+  });
+
+  sortOptions.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const sortType = btn.getAttribute('data-sort');
+      if (sortLabel) sortLabel.textContent = btn.textContent?.trim() || 'ORDENAR POR';
+
+      if (productsGrid) {
+        const cards = Array.from(productsGrid.querySelectorAll<HTMLElement>('.store-card'));
+        if (sortType === 'price-asc') {
+          cards.sort((a, b) => Number(a.getAttribute('data-price')) - Number(b.getAttribute('data-price')));
+        } else if (sortType === 'price-desc') {
+          cards.sort((a, b) => Number(b.getAttribute('data-price')) - Number(a.getAttribute('data-price')));
+        } else if (sortType === 'name-asc') {
+          cards.sort((a, b) => (a.getAttribute('data-title') || '').localeCompare(b.getAttribute('data-title') || ''));
+        }
+        cards.forEach((card) => productsGrid.appendChild(card));
+      }
+      toggleSort();
+    });
+  });
+
+  // 3. Filtro interactivo "SOLO DISPONIBLES"
+  const toggleAvailable = document.getElementById('store-toggle-available') as HTMLInputElement | null;
+  const emptyState = document.getElementById('store-empty-state');
+
+  function applyFilters() {
+    if (!productsGrid) return;
+    const cards = productsGrid.querySelectorAll<HTMLElement>('.store-card');
+    const onlyAvailable = toggleAvailable ? toggleAvailable.checked : false;
+    let visibleCount = 0;
+
+    cards.forEach((card) => {
+      const isCardAvailable = card.getAttribute('data-available') === 'true';
+      if (onlyAvailable && !isCardAvailable) {
+        card.style.display = 'none';
+      } else {
+        card.style.display = 'flex';
+        visibleCount++;
+      }
+    });
+
+    if (emptyState) {
+      if (visibleCount === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+      }
+    }
+  }
+
+  toggleAvailable?.addEventListener('change', applyFilters);
+
+  // 4. Panel de Filtros Toggle
+  const filterBtn = document.getElementById('store-filter-btn');
+  const filterPanel = document.getElementById('store-filter-panel');
+  const filterClose = document.getElementById('store-filter-close');
+
+  filterBtn?.addEventListener('click', () => {
+    filterPanel?.classList.toggle('hidden');
+  });
+
+  filterClose?.addEventListener('click', () => {
+    filterPanel?.classList.add('hidden');
+  });
+</script>

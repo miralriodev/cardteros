@@ -1,0 +1,88 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  category?: string;
+  priceMxn: number;
+  imageUrl: string;
+  isAvailable?: boolean;
+}
+
+const {
+  id,
+  title,
+  category = 'NFL',
+  priceMxn,
+  imageUrl,
+  isAvailable = true
+} = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat('es-MX', {
+  style: 'currency',
+  currency: 'MXN',
+  maximumFractionDigits: 0
+}).format(priceMxn);
+---
+
+<article
+  class="store-card relative flex flex-col justify-between rounded-2xl bg-[#111111] border border-[#222222] hover:border-[#EDE4BE]/60 p-5 transition-all duration-300 hover:shadow-[0_16px_36px_rgba(0,0,0,0.85)] group"
+  data-available={isAvailable ? 'true' : 'false'}
+  data-price={priceMxn}
+  data-title={title}
+>
+  <!-- Contenedor de Imagen de Producto -->
+  <div class="relative w-full aspect-square sm:aspect-[4/3] rounded-xl overflow-hidden bg-[#0c0c0c] flex items-center justify-center p-4 mb-4 group-hover:bg-[#151515] transition-colors">
+    <img
+      src={imageUrl}
+      alt={title}
+      class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_12px_24px_rgba(0,0,0,0.9)]"
+      loading="lazy"
+    />
+
+    {isAvailable && (
+      <span class="absolute top-2.5 right-2.5 px-2 py-0.5 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono font-bold tracking-wider uppercase">
+        DISPONIBLE
+      </span>
+    )}
+  </div>
+
+  <!-- Información de Producto según Figma: Título de Alto Impacto y Precio -->
+  <div class="flex-1 mb-3">
+    <div class="flex items-center gap-2 mb-1">
+      <span class="text-[10px] font-mono font-bold tracking-widest text-[#A72027] uppercase">
+        {category}
+      </span>
+      <span class="text-[#333333]">•</span>
+      <span class="text-[10px] font-mono tracking-wider text-[#8E8E8E] uppercase">
+        TRADING CARDS
+      </span>
+    </div>
+
+    <h3 class="font-heading text-lg sm:text-xl text-[#EDE4BE] group-hover:text-white transition-colors leading-tight tracking-wide uppercase line-clamp-2">
+      {title}
+    </h3>
+  </div>
+
+  <!-- Fila de Precio & Botón AGREGAR Oficial Figma (Píldora Crema #EDE4BE) -->
+  <div class="pt-3 border-t border-[#222222] flex flex-col gap-3">
+    <div class="flex items-baseline justify-between">
+      <span class="text-[10px] font-mono uppercase tracking-[0.2em] text-[#6E6E6E]">PRECIO</span>
+      <span class="font-heading text-2xl text-[#EDE4BE] tracking-wider font-bold">
+        {formattedPrice}
+      </span>
+    </div>
+
+    <!-- Botón Agregar Píldora Crema Oficial (#EDE4BE) -->
+    <button
+      type="button"
+      class="add-to-cart-btn w-full py-2.5 px-4 rounded-full font-heading text-base font-bold tracking-widest uppercase bg-[#EDE4BE] text-black hover:bg-white active:scale-[0.98] transition-all shadow-sm flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00E5FF]"
+      data-item-id={id}
+      data-item-title={title}
+      data-item-price={priceMxn}
+      data-item-image={imageUrl}
+      aria-label={`Agregar ${title} a la bolsa`}
+    >
+      AGREGAR
+    </button>
+  </div>
+</article>
